@@ -5,6 +5,12 @@
       "env": {
         "EXPO_PUBLIC_API_URL": "https://wevolunteer.app/api",
         "APP_ENV": "production"
+      },
+      "android": {
+        "image": "latest"
+      },
+      "ios": {
+        "image": "latest"
       }
     },
     "staging": {
