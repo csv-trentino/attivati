@@ -1,4 +1,5 @@
 import { useSession } from "@/contexts/authentication";
+import { NotificationProvider } from "@/contexts/notifications";
 import { useTheme } from "@shopify/restyle";
 import { Redirect, Stack } from "expo-router";
 
@@ -17,16 +18,16 @@ export default function AppLayout() {
   }
 
   return (
-    // <NotificationProvider>
-    <Stack
-      screenOptions={{
-        headerShown: false,
-        contentStyle: {
-          flex: 1,
-          backgroundColor: theme.colors.mainBackground,
-        },
-      }}
-    />
-    // </NotificationProvider>
+    <NotificationProvider>
+      <Stack
+        screenOptions={{
+          headerShown: false,
+          contentStyle: {
+            flex: 1,
+            backgroundColor: theme.colors.mainBackground,
+          },
+        }}
+      />
+    </NotificationProvider>
   );
 }
