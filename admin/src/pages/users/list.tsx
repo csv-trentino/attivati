@@ -39,6 +39,20 @@ export const UserList = () => {
           width="50%"
         />
         <Table.Column
+          dataIndex="accepted_newsletter"
+          title="Newsletter"
+          render={(value) => (
+            <BooleanField
+              value={value}
+              trueIcon={<TrueIcon />}
+              falseIcon={<FalseIcon />}
+              valueLabelTrue="subscribed"
+              valueLabelFalse="not subscribed"
+            />
+          )}
+          width="50%"
+        />
+        <Table.Column
           title={"Actions"}
           dataIndex="actions"
           render={(_, record: BaseRecord) => (

@@ -5,7 +5,7 @@ import {
   ShowButton,
   useTable,
 } from "@refinedev/antd";
-import { BaseRecord, useMany } from "@refinedev/core";
+import { BaseRecord } from "@refinedev/core";
 import { Input, Space, Table } from "antd";
 import { useState } from "react";
 
@@ -32,7 +32,6 @@ export const ExperienceList = () => {
       <Table {...tableProps} rowKey="id">
         <Table.Column dataIndex="id" title={"ID"} />
         <Table.Column dataIndex="title" title={"Title"} />
-        <Table.Column dataIndex="description" title={"Description"} />
         <Table.Column
           dataIndex="category"
           title={"Category"}
