@@ -15,6 +15,7 @@ export function useExperiences(initialFilters: ExperienceFilters = {}) {
           query: {
             ...initialFilters,
             ...filters,
+            published: true,
             page: pageParam,
           },
         },

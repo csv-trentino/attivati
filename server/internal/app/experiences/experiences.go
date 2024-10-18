@@ -43,6 +43,7 @@ type ExperienceFilters struct {
 	DateStart    string  `query:"date_start"`
 	DateEnd      string  `query:"date_end"`
 	Categories   []uint  `query:"categories"`
+	Published    bool    `query:"published,omitempty"`
 	Organization uint    `query:"organization"`
 }
 
@@ -84,6 +85,10 @@ func ExperienceList(ctx *app.Context, filters *ExperienceFilters) (*ExperienceLi
 
 		if filters.Organization > 0 {
 			q = q.Where("organization_id = ?", filters.Organization)
+		}
+
+		if filters.Published {
+			q = q.Where("published = ?", filters.Published)
 		}
 
 	}

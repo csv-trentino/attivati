@@ -60,6 +60,18 @@ const ExperienceDetails: FC<ExeperienceDetailsProps> = ({
     return experience.image ? { uri: experience.image } : imagePlaceholder;
   }, [experience.image]);
 
+  const organizationWebsite = useMemo(() => {
+    if (!experience.organization.website) {
+      return "";
+    }
+
+    if (experience.organization.website.startsWith("http")) {
+      return experience.organization.website;
+    }
+
+    return `https://${experience.organization.website}`;
+  }, [experience.organization.website]);
+
   return (
     <ScrollView>
       <Topbar goBack />
@@ -223,7 +235,7 @@ const ExperienceDetails: FC<ExeperienceDetailsProps> = ({
                     leftIcon="globe"
                     size="s"
                     label={t("website", "Website")}
-                    onPress={() => Linking.openURL(`${contacts.website}`)}
+                    onPress={() => Linking.openURL(organizationWebsite)}
                   />
                 )}
               </Box>
