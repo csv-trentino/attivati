@@ -16,7 +16,7 @@ function ListItem({ title, children }: ListItemProps) {
     <Box flexDirection="row" alignItems="flex-start" justifyContent="flex-start" paddingLeft="m">
       <Text>• </Text>
       <Text variant="body">
-        {title && <Text variant="subtitle">{title}:</Text>}
+        {title && <Text fontFamily="DMSansBold">{title}: </Text>}
         {children}
       </Text>
     </Box>
@@ -31,7 +31,7 @@ export default function PrivacyPolicy() {
       <Topbar goBack title={t("privacyPolicy", "Privacy Policy")} />
       <ScrollView>
         <Box px="m" py="xl">
-          <Text variant="title" fontWeight="bold" fontSize={20}>
+          <Text variant="title" fontFamily="DMSansBold" fontSize={20}>
             Informativa sul trattamento dei dati personali
           </Text>
           <Text variant="secondary">
@@ -41,7 +41,7 @@ export default function PrivacyPolicy() {
             App Attivati!
           </Text>
 
-          <Text variant="subtitle" my="m">
+          <Text variant="subtitle" fontFamily="DMSansBold" my="m">
             Introduzione
           </Text>
           <Text variant="body">
@@ -51,14 +51,16 @@ export default function PrivacyPolicy() {
             organizzazioni che le offrono.
           </Text>
 
-          <Text variant="subtitle">Cosa troverai in questo documento?</Text>
+          <Text variant="subtitle" fontFamily="DMSansBold">
+            Cosa troverai in questo documento?
+          </Text>
           <Text variant="body">
             Ti spiegheremo come e perché raccogliamo e usiamo i tuoi dati personali quando utilizzi
             l’App e come puoi fare per modificarli o cancellarli se vuoi. È importante leggere tutto
             con attenzione.
           </Text>
 
-          <Text variant="subtitle">
+          <Text variant="subtitle" fontFamily="DMSansBold">
             Alcune definizioni utili per comprendere a pieno il documento
           </Text>
 
@@ -112,7 +114,7 @@ export default function PrivacyPolicy() {
             del Titolare del trattamento.
           </ListItem>
 
-          <Text variant="subtitle" my="m">
+          <Text variant="subtitle" fontFamily="DMSansBold" my="m">
             Titolarità del trattamento
           </Text>
           <Text variant="body">
@@ -120,7 +122,7 @@ export default function PrivacyPolicy() {
             gestiti da:
           </Text>
 
-          <Text variant="body" my="m" fontWeight="bold">
+          <Text variant="body" my="m" fontFamily="DMSansBold">
             CSV Trentino – Non profit network ETS (“CSV”) e Comitato Trento Capitale Europea del
             Volontariato 2024 ETS (“Comitato”)
           </Text>
@@ -132,7 +134,7 @@ export default function PrivacyPolicy() {
             sezione “Contatti”.
           </Text>
 
-          <Text variant="title" fontWeight="bold" fontSize={20} my="m">
+          <Text variant="title" fontFamily="DMSansBold" fontSize={20} my="m">
             Data Protection Officer
           </Text>
           <Text variant="body">
@@ -142,13 +144,15 @@ export default function PrivacyPolicy() {
 
           <Divider my="m" />
 
-          <Text variant="title" fontWeight="bold" fontSize={20}>
+          <Text variant="title" fontFamily="DMSansBold" fontSize={20}>
             Perché raccogliamo i tuoi dati?
           </Text>
-          <Text variant="subtitle">A. Offrirti l’App e le sue funzionalità</Text>
+          <Text variant="subtitle" fontFamily="DMSansBold">
+            A. Offrirti l’App e le sue funzionalità
+          </Text>
           <Text variant="body">
             Per permetterti di usare la nostra applicazione e le sue funzionalità principali,
-            svolgiamo una serie di <Text fontWeight="bold">attività</Text> che comportano il
+            svolgiamo una serie di <Text fontFamily="DMSansBold">attività</Text> che comportano il
             trattamento dei tuoi dati personali, come, per esempio:
           </Text>
           <Box gap="s" my="m">
@@ -169,7 +173,7 @@ export default function PrivacyPolicy() {
 
           <Text variant="body" my="m">
             Nello svolgimento queste attività trattiamo le{" "}
-            <Text fontWeight="bold">categorie di dati personali</Text> di seguito elencate:
+            <Text fontFamily="DMSansBold">categorie di dati personali</Text> di seguito elencate:
           </Text>
 
           <ListItem title="Dati identificativi *"> (quali nome, cognome);</ListItem>
@@ -191,7 +195,7 @@ export default function PrivacyPolicy() {
             Il conferimento delle tipologie di dati indicate sopra con “*” è obbligatorio. La
             mancata fornitura di tali dati comporterà l'impossibilità di concludere e di dare
             esecuzione al contratto e dunque di procedere con il servizio richiesto.{" "}
-            <Text fontWeight="bold">
+            <Text fontFamily="DMSansBold">
               In altre parole, non ti sarà possibile utilizzare l’App se non inserisci almeno i dati
               indicati con “*”.
             </Text>
@@ -204,7 +208,9 @@ export default function PrivacyPolicy() {
             I dati d’uso vengono invece raccolti automaticamente quando utilizzi l’applicazione.
           </Text>
 
-          <Text variant="subtitle">B. Marketing diretto</Text>
+          <Text variant="subtitle" fontFamily="DMSansBold">
+            B. Marketing diretto
+          </Text>
 
           <Text variant="body">
             Solo se sei d’accordo, trattiamo i tuoi dati personali per inviarti informazioni sulle
@@ -215,7 +221,7 @@ export default function PrivacyPolicy() {
 
           <Text variant="body" my="m">
             La base giuridica che ci rende possibile trattare i tuoi dati per questa finalità è
-            l’articolo 6(1)(a) del GDPR - <Text fontWeight="bold">Consenso</Text>.
+            l’articolo 6(1)(a) del GDPR - <Text fontFamily="DMSansBold">Consenso</Text>.
           </Text>
 
           <Text variant="body">
@@ -235,17 +241,19 @@ export default function PrivacyPolicy() {
             alle comunicazioni promozionali.
           </Text>
 
-          <Text variant="subtitle">C. Altre finalità </Text>
+          <Text variant="subtitle" fontFamily="DMSansBold">
+            C. Altre finalità{" "}
+          </Text>
 
           <ListItem title="Rispondere ad ordini e richieste legittime provenienti da Autorità Pubbliche">
-            la base giuridica è data da eventuali <Text fontWeight="bold">obblighi di legge</Text> -
-            6(1)(c) GDPR e tratteremo tutti i dati eventualmente necessari per rispondere alle
-            richieste dall’Autorità Pubblica.
+            la base giuridica è data da eventuali{" "}
+            <Text fontFamily="DMSansBold">obblighi di legge</Text> - 6(1)(c) GDPR e tratteremo tutti
+            i dati eventualmente necessari per rispondere alle richieste dall’Autorità Pubblica.
           </ListItem>
           <ListItem title="Gestione di eventuali contenziosi davanti alle autorità competenti e difesa dei nostri diritti">
             la base giuridica potrebbe essere data da un{" "}
-            <Text fontWeight="bold">obbligo di legge</Text> - 6(1)(c) del GDPR o da un nostro
-            <Text fontWeight="bold"> interesse legittimo</Text> (6(1)(f) GDPR) relativo alla
+            <Text fontFamily="DMSansBold">obbligo di legge</Text> - 6(1)(c) del GDPR o da un nostro
+            <Text fontFamily="DMSansBold"> interesse legittimo</Text> (6(1)(f) GDPR) relativo alla
             gestione di eventuali contenziosi e alla difesa dei nostri diritti. Tratteremo tutti i
             dati necessari per la gestione di eventuali contenziosi e per la difesa dei nostri
             diritti.
@@ -257,11 +265,11 @@ export default function PrivacyPolicy() {
             dei dati personali; ciò potrebbe includere, ad esempio, misure volte a prevenire
             l’accesso non autorizzato e la diffusione di codici dannosi e a fermare gli attacchi di
             “blocco dei servizi”. La base giuridica è data da un nostro{" "}
-            <Text fontWeight="bold"> interesse legittimo</Text> (6(1)(f) GDPR) a garantire la
+            <Text fontFamily="DMSansBold"> interesse legittimo</Text> (6(1)(f) GDPR) a garantire la
             sicurezza dei sistemi informatici utilizzati nella realizzazione di “Attivati!”.
           </ListItem>
 
-          <Text variant="title" fontWeight="bold" fontSize={20} my="m">
+          <Text variant="title" fontFamily="DMSansBold" fontSize={20} my="m">
             Categorie particolari di dati personali
           </Text>
           <Text variant="body">
@@ -271,7 +279,7 @@ export default function PrivacyPolicy() {
             applicazione.
           </Text>
 
-          <Text variant="title" fontWeight="bold" fontSize={20} my="m">
+          <Text variant="title" fontFamily="DMSansBold" fontSize={20} my="m">
             Dati giudiziari e dati relativi a condanne penali
           </Text>
           <Text variant="body">
@@ -279,7 +287,7 @@ export default function PrivacyPolicy() {
             ti invitiamo a non condividere con noi dati personali di questa natura.
           </Text>
 
-          <Text variant="title" fontWeight="bold" fontSize={20} my="m">
+          <Text variant="title" fontFamily="DMSansBold" fontSize={20} my="m">
             Cookies e tecnologie simili
           </Text>
           <Text variant="body">
@@ -294,7 +302,7 @@ export default function PrivacyPolicy() {
             all’utilizzo dei cookie
           </Text>
 
-          <Text variant="title" fontWeight="bold" fontSize={20} my="m">
+          <Text variant="title" fontFamily="DMSansBold" fontSize={20} my="m">
             Come raccogliamo i tuoi dati
           </Text>
           <Text variant="body">
@@ -314,7 +322,7 @@ export default function PrivacyPolicy() {
               funzionare l’applicazione stessa).
             </Text>
           </Box>
-          <Text variant="title" fontWeight="bold" fontSize={20} my="m">
+          <Text variant="title" fontFamily="DMSansBold" fontSize={20} my="m">
             Condivisione dei tuoi dati
           </Text>
           <Text variant="body">
@@ -324,7 +332,9 @@ export default function PrivacyPolicy() {
           </Text>
 
           <Box gap="s">
-            <Text variant="subtitle">a. Organizzazioni aderenti all’app</Text>
+            <Text variant="subtitle" fontFamily="DMSansBold">
+              a. Organizzazioni aderenti all’app
+            </Text>
             <Text variant="body">
               Nel momento in cui chiedi di partecipare ad una attività di volontariato presente
               sull’App, i tuoi dati personali saranno comunicati all’Ente Non Profit che promuove
@@ -336,26 +346,32 @@ export default function PrivacyPolicy() {
               direttamente responsabile della protezione degli stessi. Potrai chiedere all’Ente così
               individuato maggiori informazioni relativamente al trattamento dei tuoi dati.
             </Text>
-            <Text variant="subtitle">b. Responsabili del trattamento</Text>
+            <Text variant="subtitle" fontFamily="DMSansBold">
+              b. Responsabili del trattamento
+            </Text>
             <Text variant="body">
               Avremo bisogno di affidare la gestione di alcune attività (e dei tuoi dati) ad aziende
               specializzate (come quelle che gestiscono i server o conservano i dati per conto
               nostro). In questi casi, ci assicuriamo che queste aziende trattino i tuoi dati con la
               massima riservatezza e sicurezza (Art. 28 GDPR).
             </Text>
-            <Text variant="subtitle">c. c. Autorità pubbliche</Text>
+            <Text variant="subtitle" fontFamily="DMSansBold">
+              c. c. Autorità pubbliche
+            </Text>
             <Text variant="body">
               Potremmo aver bisogno di condividere i tuoi dati con Autorità Pubbliche che ne
               facciano legittima richiesta, in adempimento ad obblighi nazionali e/o internazionali.
             </Text>
-            <Text variant="subtitle">b. d. Condivisione tra contitolari</Text>
+            <Text variant="subtitle" fontFamily="DMSansBold">
+              b. d. Condivisione tra contitolari
+            </Text>
             <Text variant="body">
               In quanto contitolari, Comitato e CSV condividono la titolarità dei dati personali di
               “Attivati!”, al fine comune di fornirti un’App completa e funzionante.
             </Text>
           </Box>
 
-          <Text variant="title" fontWeight="bold" fontSize={20} my="m">
+          <Text variant="title" fontFamily="DMSansBold" fontSize={20} my="m">
             Trasferimento dei dati al di fuori dell’UE/SEE
           </Text>
           <Text variant="body">
@@ -369,7 +385,7 @@ export default function PrivacyPolicy() {
             previste dal GDPR stesso. Per ulteriori dettagli sui trasferimenti puoi contattare il
             nostro DPO in qualsiasi momento.
           </Text>
-          <Text variant="title" fontWeight="bold" fontSize={20} my="m">
+          <Text variant="title" fontFamily="DMSansBold" fontSize={20} my="m">
             Conservazione dei dati personali
           </Text>
           <Text variant="body">
@@ -384,7 +400,7 @@ export default function PrivacyPolicy() {
             o per gli interessi legittimi da noi perseguiti e non si applica nessun'altra base
             giuridica, cancelleremo i tuoi dati.
           </Text>
-          <Text variant="title" fontWeight="bold" fontSize={20} my="m">
+          <Text variant="title" fontFamily="DMSansBold" fontSize={20} my="m">
             I tuoi diritti
           </Text>
           <Box my="m">
@@ -451,10 +467,10 @@ export default function PrivacyPolicy() {
             privacy@volontariatotrentino.it.
           </Text>
 
-          <Text variant="title" fontWeight="bold" fontSize={20} my="m">
+          <Text variant="title" fontFamily="DMSansBold" fontSize={20} my="m">
             Contatti
           </Text>
-          <Text variant="subtitle" my="m">
+          <Text variant="subtitle" fontFamily="DMSansBold" my="m">
             CSV Trentino – Non profit network ETS (“CSV”)
           </Text>
           <Box gap="s">
@@ -463,7 +479,7 @@ export default function PrivacyPolicy() {
             <Text variant="body">Email: privacy@volontariatotrentino.it</Text>
             <Text variant="body">C.F. 96061940225 - P. IVA 01852790227.</Text>
           </Box>
-          <Text variant="subtitle" my="m">
+          <Text variant="subtitle" fontFamily="DMSansBold" my="m">
             Comitato Trento Capitale Europea del Volontariato 2024 ETS (“Comitato”)
           </Text>
           <Box gap="s">
@@ -471,7 +487,7 @@ export default function PrivacyPolicy() {
             <Text variant="body">E-mail: info@trentovolo.capital</Text>
             <Text variant="body">C.F. 96121400228.</Text>
           </Box>
-          <Text variant="title" fontWeight="bold" fontSize={20} my="m">
+          <Text variant="title" fontFamily="DMSansBold" fontSize={20} my="m">
             Aggiornamento dell’informativa
           </Text>
           <Text variant="body">
