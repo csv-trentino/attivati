@@ -1,6 +1,7 @@
 import { useNetwork } from "@/contexts/network";
 import { useQuery } from "@tanstack/react-query";
 import { FC, useMemo, useState } from "react";
+import { ScrollView } from "react-native-gesture-handler";
 import ChoiceList from "./ChoiceList";
 import SearchbarFilter from "./Filter";
 
@@ -48,16 +49,18 @@ const CategoryFilter: FC<CategoryFilterProps> = ({ title, values, onChange }) =>
       onReset={() => setSelected([])}
       onConfirm={() => onChange && onChange(selected)}
     >
-      <ChoiceList>
-        {data?.results?.map((option) => (
-          <ChoiceList.Item
-            key={option.id}
-            label={option.name}
-            selected={selected.includes(option.id)}
-            onPress={() => toggleChoice(option.id)}
-          />
-        ))}
-      </ChoiceList>
+      <ScrollView style={{ maxHeight: "90%" }}>
+        <ChoiceList>
+          {data?.results?.map((option) => (
+            <ChoiceList.Item
+              key={option.id}
+              label={option.name}
+              selected={selected.includes(option.id)}
+              onPress={() => toggleChoice(option.id)}
+            />
+          ))}
+        </ChoiceList>
+      </ScrollView>
     </SearchbarFilter>
   );
 };

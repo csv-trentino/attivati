@@ -52,6 +52,18 @@ export default function OrganizationsListScreen() {
     return organization && (organization.email || organization.phone || organization.website);
   }, [organization]);
 
+  const organizationWebsite = useMemo(() => {
+    if (!organization?.website) {
+      return "";
+    }
+
+    if (organization?.website.startsWith("http")) {
+      return organization.website;
+    }
+
+    return `https://${organization.website}`;
+  }, [organization?.website]);
+
   if (!organization || !experiences) {
     return null;
   }
@@ -112,11 +124,10 @@ export default function OrganizationsListScreen() {
                   {organization.city}
                 </Text>
               </Box>
-
               {hasContacts && (
                 <ScrollView horizontal>
                   <Box flexDirection="row" gap="m" justifyContent="space-around" px="m">
-                    {organization.email && (
+                    {organization.email && organization.email !== "" && (
                       <Button
                         variant="secondary"
                         leftIcon="mail"
@@ -125,7 +136,7 @@ export default function OrganizationsListScreen() {
                         onPress={() => Linking.openURL(`mailto:${organization.email}`)}
                       />
                     )}
-                    {organization.phone && (
+                    {organization.phone && organization.phone !== "" && (
                       <Button
                         variant="secondary"
                         leftIcon="phone"
@@ -134,13 +145,13 @@ export default function OrganizationsListScreen() {
                         onPress={() => Linking.openURL(`tel:${organization.phone}`)}
                       />
                     )}
-                    {organization.website && (
+                    {organization.website && organization.website !== "" && (
                       <Button
                         variant="secondary"
                         leftIcon="globe"
                         size="s"
                         label={t("website", "Website")}
-                        onPress={() => Linking.openURL(`${organization.website}`)}
+                        onPress={() => Linking.openURL(organizationWebsite)}
                       />
                     )}
                   </Box>

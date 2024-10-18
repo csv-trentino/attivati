@@ -35,7 +35,7 @@ const InputTime: FC<TextInputProps & InputTimeProps> = ({
       <Pressable onPress={() => setShow(true)}>
         <Text variant="inputLabel">{label}</Text>
         <Box borderWidth={1} borderColor="mainBorder" borderRadius="m" px="m" py="m">
-          {value ? <Text>{value}</Text> : <Text color="secondaryText">GG/MM/AAAA</Text>}
+          {value ? <Text>{value}</Text> : <Text color="secondaryText">HH:MM</Text>}
         </Box>
         {error && (
           <Text variant="error" marginTop="s">

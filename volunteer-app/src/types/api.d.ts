@@ -1157,6 +1157,7 @@ export interface operations {
         date_start?: string;
         date_end?: string;
         categories?: number[] | null;
+        published?: boolean;
         organization?: number;
       };
     };

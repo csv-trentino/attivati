@@ -24,7 +24,7 @@ const ChoiceListItem: FC<ChoiceListItemProps> = ({ label, section, selected, onP
         justifyContent="space-between"
         borderBottomColor="lightBorder"
         alignItems="center"
-        height={58}
+        py="s"
         width="100%"
         borderBottomWidth={1}
       >
@@ -54,7 +54,7 @@ const ChoiceList: FC<ChoiceListProps> & {
   Item: typeof ChoiceListItem;
 } = ({ children }) => {
   return (
-    <Box marginHorizontal="m" marginVertical="s">
+    <Box marginHorizontal="m" marginVertical="xs">
       {children}
     </Box>
   );
