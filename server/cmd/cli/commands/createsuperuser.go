@@ -22,11 +22,7 @@ func CreateSuperUserCommand(input CreateSuperUserInput) error {
 		return fmt.Errorf("password is required")
 	}
 
-	user, err := accounts.UserGetByEmail(input.Email)
-
-	if err != nil {
-		return err
-	}
+	user, _ := accounts.UserGetByEmail(input.Email)
 
 	if user != nil {
 		isSuperUser := true
@@ -45,7 +41,7 @@ func CreateSuperUserCommand(input CreateSuperUserInput) error {
 		IsSuperUser: true,
 	}
 
-	_, err = accounts.UserCreate(&data)
+	_, err := accounts.UserCreate(&data)
 
 	if err != nil {
 		return err
