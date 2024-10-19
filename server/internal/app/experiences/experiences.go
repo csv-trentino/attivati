@@ -230,7 +230,7 @@ func ExperienceCreate(ctx *app.Context, data *ExperienceCreateData) (*models.Exp
 		EndDate:                    endDate,
 		StartTime:                  data.StartTime,
 		EndTime:                    data.EndTime,
-		Published:                  data.Published,
+		Published:                  true,
 		Skills:                     data.Skills,
 	}
 

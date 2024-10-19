@@ -5,6 +5,7 @@ import (
 	"time"
 
 	"github.com/wevolunteer/wevolunteer/internal/app"
+	"github.com/wevolunteer/wevolunteer/internal/app/events"
 	"github.com/wevolunteer/wevolunteer/internal/models"
 )
 
@@ -42,6 +43,7 @@ func UserProfileGet(user *models.User) (*models.User, error) {
 }
 
 func UserProfileUpdate(user *models.User, data UserProfileUpdateData) error {
+	registration := user.FirstName == "" && user.LastName == "" && data.FistName != nil && data.LastName != nil
 
 	if data.Avatar != nil {
 		user.Avatar = *data.Avatar
@@ -134,6 +136,17 @@ func UserProfileUpdate(user *models.User, data UserProfileUpdateData) error {
 		return err
 	}
 
+	if registration {
+		events.Publish(events.Event{
+			Type: events.UserSignup,
+			Payload: events.EventPayload{
+				Data: &events.UserEventPayload{
+					User: user,
+				},
+			},
+		})
+	}
+
 	return nil
 }
 
@@ -155,6 +168,8 @@ func UserProfileDelete(user *models.User, data UserProfileDeleteData) error {
 	if err != nil {
 		return err
 	}
+
+	deletedUser := *user
 
 	user.Email = "deleted_user_" + randomString
 	user.OTPCode = ""
@@ -178,6 +193,15 @@ func UserProfileDelete(user *models.User, data UserProfileDeleteData) error {
 	if err := app.DB.Save(&user).Error; err != nil {
 		return err
 	}
+
+	events.Publish(events.Event{
+		Type: events.UserDeleted,
+		Payload: events.EventPayload{
+			Data: &events.UserEventPayload{
+				User: &deletedUser,
+			},
+		},
+	})
 
 	return nil
 }

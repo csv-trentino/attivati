@@ -11,12 +11,16 @@ import (
 )
 
 const (
-	NotificationVerificationCodeAuth     = "verification-code"
-	NotificationVerificationCodeDelete   = "verification-code-delete"
-	NotificationActivityAccepted         = "enrollment-confirmation"
-	NotificationExeperienceCreatedOrg    = "new-activity-for-organization"
-	NotificationExeperienceCreatedNearby = "new-actvity-nearby"
-	NotificationWelcome                  = "welcome"
+	NotificationUserSignup                  = "welcome"
+	NotificationUserDelete                  = "account-deleted"
+	NotificationUserEmailChanged            = "account-email-has-been-changed"
+	NotificationVerificationCodeAuth        = "verification-code"
+	NotificationVerificationCodeDelete      = "verification-code-delete"
+	NotificationVerificationCodeEmailChange = "verification-code-email-change"
+	NotificationActivityAccepted            = "enrollment-confirmation"
+	NotificationExeperienceCreatedOrg       = "new-activity-for-organization"
+	NotificationExeperienceCreatedNearby    = "new-actvity-nearby"
+	NotificationActivityReminder            = "activity-reminder"
 )
 
 func Init() {

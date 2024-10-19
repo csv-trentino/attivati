@@ -11,6 +11,7 @@ type EventType string
 const (
 	UserSignup                   EventType = "user.signup"
 	UserLogin                    EventType = "user.login"
+	UserDeleted                  EventType = "user.deleted"
 	UserFollowOrg                EventType = "user.follow.org"
 	UserUnfollowOrg              EventType = "user.unfollow.org"
 	UserCodeRequestedAuth        EventType = "user.code.requested.auth"

@@ -174,8 +174,10 @@ func OrganizationCreate(c *app.Context, data *OrganizationCreateData) (*models.O
 	}
 
 	organization := models.Organization{
-		Name: data.Name,
-		UID:  uuid.String(),
+		Name:       data.Name,
+		UID:        uuid.String(),
+		Published:  true,
+		CategoryID: &data.CategoryID,
 	}
 
 	if data.Logo != nil {
@@ -198,8 +200,6 @@ func OrganizationCreate(c *app.Context, data *OrganizationCreateData) (*models.O
 		organization.Phone = *data.Phone
 	}
 
-	organization.CategoryID = &data.CategoryID
-
 	if data.Address != nil {
 		organization.Address = *data.Address
 	}
@@ -213,9 +213,7 @@ func OrganizationCreate(c *app.Context, data *OrganizationCreateData) (*models.O
 	}
 
 	if data.ZipCode != nil {
-
 		organization.ZipCode = *data.ZipCode
-
 	}
 
 	if data.Country != nil {
@@ -241,12 +239,6 @@ func OrganizationCreate(c *app.Context, data *OrganizationCreateData) (*models.O
 	if data.ExternalId != nil {
 		organization.ExternalId = *data.ExternalId
 	}
-
-	if data.Published != nil {
-		organization.Published = *data.Published
-	}
-
-	fmt.Printf("organization: %v\n", organization)
 
 	if err := app.DB.Create(&organization).Error; err != nil {
 		fmt.Printf("error: %v\n", err)
