@@ -64,7 +64,9 @@ export const ExperienceCard: FC<ExperienceCardProps> = ({ experience, onPress, o
           </Pressable>
         )}
         <Box flex={1} padding="m">
-          <Text variant="secondary">{experience.organization.name}</Text>
+          <Text variant="secondary" numberOfLines={2}>
+            {experience.organization.name}
+          </Text>
           <Box flex={1} marginVertical="s">
             <Text variant="body" fontSize={16} fontFamily={"DMSansMedium"} numberOfLines={3}>
               {experience.title}
@@ -80,7 +82,16 @@ export const ExperienceCard: FC<ExperienceCardProps> = ({ experience, onPress, o
           </Text>
         </Box>
         <Box flex={1}>
-          <Animated.Image source={image} style={{ width: "100%", height: 179 }} />
+          <Animated.Image
+            source={image}
+            style={{
+              width: "100%",
+              minHeight: 179,
+              height: "100%",
+              borderBottomRightRadius: 8,
+              borderTopRightRadius: 8,
+            }}
+          />
         </Box>
       </Box>
     </Pressable>
