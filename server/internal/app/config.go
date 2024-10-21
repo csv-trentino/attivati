@@ -23,6 +23,9 @@ var Config struct {
 	DB_MAX_LIFETIME         time.Duration
 	NOVU_API_KEY            string
 
+	STORE_SERVICE_ACCOUNT string
+	STORE_SERVICE_OTP     string
+
 	AWS_PUBLIC_KEY string
 	AWS_SECRET_KEY string
 	AWS_ENDPOINT   string
@@ -49,6 +52,9 @@ func ParseConfig(path string) {
 	viper.SetDefault("aws_region", "us-east-1")
 	viper.SetDefault("app_url", "http://localhost:3000")
 
+	viper.Set("store_service_account", "example@example.com")
+	viper.Set("store_service_otp", "12345")
+
 	viper.SetConfigFile(".env")
 	viper.AddConfigPath(".")
 
@@ -70,6 +76,9 @@ func ParseConfig(path string) {
 	Config.AWS_REGION = viper.GetString("aws_region")
 	Config.AWS_BUCKET = viper.GetString("aws_bucket")
 	Config.CDN_ENDPOINT = viper.GetString("cdn_endpoint")
+
+	Config.STORE_SERVICE_ACCOUNT = viper.GetString("store_service_account")
+	Config.STORE_SERVICE_OTP = viper.GetString("store_service_otp")
 
 	Config.APP_URL = viper.GetString("app_url")
 

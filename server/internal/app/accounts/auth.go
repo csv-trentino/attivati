@@ -75,6 +75,13 @@ func requestCode(data RequestCodeData) error {
 
 	otp := generateOTP()
 
+	if data.Email == app.Config.STORE_SERVICE_ACCOUNT {
+		otp = &OTP{
+			OTPCode:         app.Config.STORE_SERVICE_OTP,
+			OTPCodeExpireAt: time.Now().Add(time.Minute * time.Duration(OTPCodeTTL)),
+		}
+	}
+
 	user.OTPCode = otp.OTPCode
 	user.OTPCodeExpireAt = otp.OTPCodeExpireAt
 
