@@ -13,7 +13,7 @@ export default function Index() {
   const { t } = useTranslation();
 
   useEffect(() => {
-    if (session) {
+    if (session && !session.user) {
       fetchUser();
     }
   }, [session, fetchUser]);
