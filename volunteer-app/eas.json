@@ -3,7 +3,7 @@
     "production": {
       "autoIncrement": true,
       "env": {
-        "EXPO_PUBLIC_API_URL": "https://wevolunteer.app/api",
+        "EXPO_PUBLIC_API_URL": "https://attivati.volontariatotrentino.it",
         "APP_ENV": "production"
       },
       "android": {
@@ -15,7 +15,9 @@
     },
     "staging": {
       "extends": "production",
+      "distribution": "internal",
       "env": {
+        "EXPO_PUBLIC_API_URL": "https://attivati-test.wevolunteer.app",
         "APP_ENV": "staging"
       }
     },
