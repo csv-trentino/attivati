@@ -75,7 +75,7 @@ export function SessionProvider(props: React.PropsWithChildren) {
           newAccessToken = refreshTokenResponse.data.access_token;
         } catch (error) {
           setSession(null);
-          console.error("Failed to refresh token", error);
+          console.debug("Middleware: Failed to refresh token", error);
         }
 
         // Retry the original request with the new access token
@@ -128,7 +128,7 @@ export function SessionProvider(props: React.PropsWithChildren) {
           return refreshTokenResponse.data.access_token;
         } catch (error) {
           setSession(null);
-          console.error("Failed to refresh token", error);
+          console.debug("GetAccessToken: Failed to refresh token", error);
         }
       }
 
@@ -164,7 +164,7 @@ export function SessionProvider(props: React.PropsWithChildren) {
         });
 
         if (response.error) {
-          console.error("request code error:", response.error);
+          console.debug("request code error:", response.error);
           return false;
         }
 
@@ -205,7 +205,7 @@ export function SessionProvider(props: React.PropsWithChildren) {
         });
 
         if (response.error) {
-          console.error("delete profile error:", response.error);
+          console.debug("delete profile error:", response.error);
           return false;
         }
 

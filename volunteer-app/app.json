@@ -2,7 +2,7 @@
   "expo": {
     "name": "Attivati",
     "slug": "attivati",
-    "version": "1.0.16",
+    "version": "1.0.19",
     "orientation": "portrait",
     "icon": "./src/assets/images/icon.png",
     "scheme": "attivati",
@@ -15,7 +15,7 @@
     "jsEngine": "hermes",
     "ios": {
       "bundleIdentifier": "it.volontariatotrentino.attivati",
-      "supportsTablet": true,
+      "supportsTablet": false,
       "buildNumber": "13"
     },
     "android": {
@@ -42,14 +42,14 @@
       [
         "expo-location",
         {
-          "locationAlwaysAndWhenInUsePermission": "Consenti a $(PRODUCT_NAME) di accedere alla tua posizione mentre usi l'applicazione."
+          "locationAlwaysAndWhenInUsePermission": "Consenti a $(PRODUCT_NAME) di accedere alla tua posizione per poterti segnalare le opportunità di volontariato più vicine a te."
         }
       ],
       [
         "expo-image-picker",
         {
-          "photosPermission": "Consenti a $(PRODUCT_NAME) di accedere alle tue foto.",
-          "cameraPermission": "Consenti a $(PRODUCT_NAME) di accedere alla tua fotocamera."
+          "photosPermission": "Consenti a $(PRODUCT_NAME) di accedere alle tue foto per selezionare una foto per il tuo profilo di volontario.",
+          "cameraPermission": "Consenti a $(PRODUCT_NAME) di accedere alla tua fotocamera per selezionare una foto per il tuo profilo di volontario."
         }
       ]
     ],

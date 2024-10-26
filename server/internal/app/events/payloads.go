@@ -10,6 +10,10 @@ type EventPayload struct {
 	Data interface{}
 }
 
+type UserEventPayload struct {
+	User *models.User
+}
+
 type UserDeviceCreatePayload struct {
 	User   *models.User
 	Device *models.UserDevice
