@@ -52,8 +52,8 @@ func ParseConfig(path string) {
 	viper.SetDefault("aws_region", "us-east-1")
 	viper.SetDefault("app_url", "http://localhost:3000")
 
-	viper.Set("store_service_account", "example@example.com")
-	viper.Set("store_service_otp", "12345")
+	viper.SetDefault("store_service_account", "example@example.com")
+	viper.SetDefault("store_service_otp", "12345")
 
 	viper.SetConfigFile(".env")
 	viper.AddConfigPath(".")
@@ -89,4 +89,26 @@ func ParseConfig(path string) {
 	if Config.NOVU_API_KEY == "" {
 		log.Debug("NOVU_API_KEY not set. Notifications are disabled")
 	}
+
+	log.Debugf("Config DEBUG: %v", Config.DEBUG)
+	log.Debugf("Config DB_DSN: %v", Config.DB_DSN)
+	log.Debugf("Config NOVU_API_KEY: %v", anonimizeString(Config.NOVU_API_KEY))
+	log.Debugf("Config DB_MAX_LIFETIME: %v", Config.DB_MAX_LIFETIME)
+	log.Debugf("Config AWS_PUBLIC_KEY: %v", anonimizeString(Config.AWS_PUBLIC_KEY))
+	log.Debugf("Config AWS_SECRET_KEY: %v", anonimizeString(Config.AWS_SECRET_KEY))
+	log.Debugf("Config AWS_ENDPOINT: %v", Config.AWS_ENDPOINT)
+	log.Debugf("Config AWS_REGION: %v", Config.AWS_REGION)
+
+	log.Debugf("Config STORE_SERVICE_ACCOUNT: %v", Config.STORE_SERVICE_ACCOUNT)
+	log.Debugf("Config STORE_SERVICE_OTP: %v", Config.STORE_SERVICE_OTP)
+
+	log.Debugf("Config APP_URL: %v", Config.APP_URL)
+}
+
+func anonimizeString(s string) string {
+	if len(s) <= 3 {
+		return s
+	}
+
+	return s[:3] + "***"
 }
