@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import csvtrentinoPic from "../assets/images/logo-csvtrentino.png"
 import trentovoloPic from "../assets/images/logo-trentovolo.png"
-import { APPLE_STORE_URL, GOOGLE_PLAY_URL } from '../consts'
+import { APPLE_STORE_URL, GITHUB_URL, GOOGLE_PLAY_URL } from '../consts'
 
 export default function Footer() {
   return (
@@ -38,6 +38,7 @@ export default function Footer() {
           <div className='mb-8'>Link utili</div>
           <a className='underline text-gray-500' href="/terms-of-service">Termini e Condizioni</a>
           <a className='underline text-gray-500' href="/privacy-policy">Privacy Policy</a>
+          <a className='underline text-gray-500' href={GITHUB_URL}>Github</a>
         </div>
       </div>
 

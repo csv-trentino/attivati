@@ -5,6 +5,8 @@ export const GOOGLE_PLAY_URL =
 
 export const NEWSLETTER_URL = "https://www.volontariatotrentino.it/newsletter"
 
+export const GITHUB_URL = "https://github.com/csv-trentino/attivati"
+
 export const OPPORTUNITY_URL = "#"
 export const INFO_URL =
   "https://gestionale.volontariatotrentino.it/Frontend/ServizioPublic.aspx?IDServizio=68"
