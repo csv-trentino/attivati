@@ -31,6 +31,7 @@ export const ExperienceCard: FC<ExperienceCardProps> = ({ experience, onPress, o
         shadowRadius={3}
         elevation={6}
         m={"l"}
+        maxHeight={190}
         position="relative"
         borderRadius="m"
         flexDirection="row"
