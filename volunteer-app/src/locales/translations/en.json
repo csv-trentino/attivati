@@ -67,7 +67,7 @@
   "endDateBeforeStartDate": "End date must be after start date",
   "endTimeBeforeStartTime": "End time must be after start time",
   "errorRequestingVerificationCode": "Error requesting verification code",
-  "experienceConfirmationMessage": "You have successfully submitted your application. Now you just have to wait for the organization to contact you to schedule the next steps. Remember that you can always check the status of your applications from the FaXTe Experiences tab.",
+  "experienceConfirmationMessage": "You have successfully submitted your application. Now you just have to wait for the organization to contact you to schedule the next steps. Remember that you can always check the status of your applications from the Attivati! Experiences tab.",
   "experienceEditMessage": "The organization has received your request and will contact you soon. Stay tuned!",
   "Experiences": "Experiences",
   "explore": "Explore",

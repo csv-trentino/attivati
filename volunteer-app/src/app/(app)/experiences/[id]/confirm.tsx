@@ -37,7 +37,7 @@ export default function ExperienceEnrollConfirmScreen() {
           <Trans i18nKey="experienceConfirmationMessage">
             You have successfully submitted your application. Now you just have to wait for the
             organization to contact you to schedule the next steps. Remember that you can always
-            check the status of your applications from the FaXTe Experiences tab.
+            check the status of your applications from the Attivati! Experiences tab.
           </Trans>
         </Text>
       </Box>

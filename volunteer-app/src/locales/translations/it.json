@@ -67,7 +67,7 @@
   "endDateBeforeStartDate": "La data di fine deve essere successiva a quella di inizio",
   "endTimeBeforeStartTime": "L'orario di fine deve essere successivo a quello di inizio",
   "errorRequestingVerificationCode": "Si è verificato un errore durante l'invio del codice di verifica. Riprova più tardi.",
-  "experienceConfirmationMessage": "Hai inviato con successo la tua candidatura. Ora devi solo aspettare che l'organizzazione ti contatti per concordare i prossimi passaggi. Ricorda che puoi sempre controllare lo stato delle tue candidature dalla scheda Esperienze di FaXTe.",
+  "experienceConfirmationMessage": "Hai inviato con successo la tua candidatura. Ora devi solo aspettare che l'organizzazione ti contatti per concordare i prossimi passaggi. Ricorda che puoi sempre controllare lo stato delle tue candidature dalla scheda Esperienze di Attivati!.",
   "experienceEditMessage": "Grazie, abbiamo inviato correttamente la tua candidatura. Ora non ti resta che aspettare che ti ricontatti l’organizzazione per fissare i prossimi passaggi. Ricorda che puoi sempre verificare lo stato delle tue candidature dalla tab Attività di Attivati!.",
   "Experiences": "Esperienze",
   "explore": "Esplora",
