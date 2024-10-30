@@ -202,7 +202,7 @@ export default function RegistrationScreen() {
             )}
             <Text variant="secondary" marginTop="s">
               <Trans i18nKey="registrationAgeDescription">
-                To register for FaXTe you must be at least 14 years old.
+                To register for Attivati! you must be at least 14 years old.
               </Trans>
             </Text>
           </Box>
@@ -252,7 +252,7 @@ export default function RegistrationScreen() {
                 <Box flexDirection="row" gap="s" flexWrap="wrap">
                   <Text variant="body">
                     <Trans i18nKey="registrationNewsletterDescription">
-                      I want to receive communications about FaXTe initiatives
+                      I want to receive communications about Attivati! initiatives
                     </Trans>
                   </Text>
                 </Box>
