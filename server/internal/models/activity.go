@@ -1,6 +1,8 @@
 package models
 
-import "time"
+import (
+	"time"
+)
 
 type ActivityStatus string
 
@@ -21,8 +23,8 @@ type Activity struct {
 	Experience     Experience     `json:"experience"`
 	OrganizationID uint           `json:"-"`
 	Organization   Organization   `json:"-"`
-	StartDate      time.Time      `json:"start_date"`
-	EndDate        time.Time      `json:"end_date"`
+	StartDate      *time.Time     `json:"start_date"`
+	EndDate        *time.Time     `json:"end_date"`
 	StartTime      string         `json:"start_time"`
 	EndTime        string         `json:"end_time"`
 	Status         ActivityStatus `json:"status" gorm:"type:varchar(20);default:pending"` // pending, approved, rejected

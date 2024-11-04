@@ -211,11 +211,11 @@ func ActivityCreate(ctx *app.Context, data *ActivityCreateData) (*models.Activit
 	}
 
 	if startDate != (time.Time{}) {
-		activity.StartDate = startDate
+		activity.StartDate = &startDate
 	}
 
 	if endDate != (time.Time{}) {
-		activity.EndDate = endDate
+		activity.EndDate = &endDate
 	}
 
 	if err := app.DB.Create(&activity).Error; err != nil {
@@ -258,11 +258,15 @@ func ActivityUpdate(ctx *app.Context, id uint, data *ActivityUpdateData) (*model
 	}
 
 	if data.StartDate != nil {
+		fmt.Printf("data.StartDate: %v\n", *data.StartDate)
 		startDate, err := time.Parse("2006-01-02", *data.StartDate)
+
 		if err != nil {
+			fmt.Printf("err: %v\n", err)
 			return nil, fmt.Errorf("invalid start date")
 		}
-		activity.StartDate = startDate
+		fmt.Printf("startDate: %v\n", startDate)
+		activity.StartDate = &startDate
 	}
 
 	if data.EndDate != nil {
@@ -270,7 +274,7 @@ func ActivityUpdate(ctx *app.Context, id uint, data *ActivityUpdateData) (*model
 		if err != nil {
 			return nil, fmt.Errorf("invalid end date")
 		}
-		activity.EndDate = endDate
+		activity.EndDate = &endDate
 	}
 
 	if data.StartTime != nil {

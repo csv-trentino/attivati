@@ -88,10 +88,12 @@ func ExperienceList(ctx *app.Context, filters *ExperienceFilters) (*ExperienceLi
 		}
 
 		if filters.Published {
-			q = q.Where("published = ?", filters.Published)
+			q = q.Where("experiences.published = ?", filters.Published)
 		}
 
 	}
+
+	q.Order("start_date DESC")
 
 	pageInfo, err := app.PageInfo(q, filters.PaginationInput)
 

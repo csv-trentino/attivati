@@ -55,6 +55,7 @@ func generateCategories(count int) ([]*models.Category, error) {
 		{Name: "Religione", Code: "Religione"},
 		{Name: "Relazioni sindacali e rappresentanza di interessi", Code: "RelazioniSindacali"},
 		{Name: "Altre attività", Code: "AltreAttivita"},
+		{Name: "Alternanza Scuola-Lavoro", Code: "AlternanzaScuolaLavoro"},
 	}
 
 	for category := range categories {
