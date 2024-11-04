@@ -52,9 +52,13 @@ export default function ActivityEditScreen() {
 
   useEffect(() => {
     if (data) {
-      setValue("start_date", convertToDDMMYYYY(data.start_date));
+      if (data.start_date) {
+        setValue("start_date", convertToDDMMYYYY(data.start_date));
+      }
       setValue("start_time", data.start_time);
-      setValue("end_date", convertToDDMMYYYY(data.end_date));
+      if (data.end_date) {
+        setValue("end_date", convertToDDMMYYYY(data.end_date));
+      }
       setValue("end_time", data.end_time);
     }
   }, [data, setValue]);
@@ -65,13 +69,18 @@ export default function ActivityEditScreen() {
 
   async function onSubmit(data: ActivityUpdateData) {
     try {
-      let start_date = "";
-      let end_date = "";
+      let start_date = undefined;
+      let end_date = undefined;
 
-      if (data.start_date && data.end_date) {
+      if (data.start_date) {
         start_date = data.start_date.split("/").reverse().join("-");
-        end_date = data.end_date.split("/").reverse().join("-");
+      }
 
+      if (data.end_date) {
+        end_date = data.end_date.split("/").reverse().join("-");
+      }
+
+      if (start_date && end_date) {
         if (new Date(start_date) > new Date(end_date)) {
           setError("end_date", {
             type: "manual",
@@ -93,7 +102,7 @@ export default function ActivityEditScreen() {
         }
       }
 
-      if (data.start_time && data.start_date) {
+      if (data.start_time && data.start_date && start_date) {
         // if start_date is today, check if start_time is in the future
 
         const now = new Date();
@@ -165,7 +174,6 @@ export default function ActivityEditScreen() {
               <Controller
                 control={control}
                 name="end_time"
-                rules={{ required: t("requiredField", "This field is required") }}
                 render={({ field: { onChange, value } }) => (
                   <InputTime
                     label={t("fromTime", "From hour")}
@@ -181,14 +189,13 @@ export default function ActivityEditScreen() {
               <Controller
                 control={control}
                 name="start_date"
-                rules={{ required: t("requiredField", "This field is required") }}
                 render={({ field: { onChange, value } }) => (
                   <InputDate
                     label={t("fromDay", "Of the day")}
                     value={value}
                     error={errors.start_date?.message}
                     minimumDate={new Date()}
-                    maximumDate={convertToDate(data.end_date)}
+                    maximumDate={data.end_date ? convertToDate(data.end_date) : undefined}
                     onChangeText={onChange}
                     placeholder="GG/MM/AAAA"
                   />
@@ -204,7 +211,6 @@ export default function ActivityEditScreen() {
               <Controller
                 control={control}
                 name="end_time"
-                rules={{ required: t("requiredField", "This field is required") }}
                 render={({ field: { onChange, value } }) => (
                   <InputTime
                     label={t("toTime", "To hour")}
@@ -220,14 +226,13 @@ export default function ActivityEditScreen() {
               <Controller
                 control={control}
                 name="end_date"
-                rules={{ required: t("requiredField", "This field is required") }}
                 render={({ field: { onChange, value } }) => (
                   <InputDate
                     label={t("toDate", "Of the day")}
                     value={value}
                     error={errors.end_date?.message}
                     minimumDate={new Date()}
-                    maximumDate={convertToDate(data.end_date)}
+                    maximumDate={data.end_date ? convertToDate(data.end_date) : undefined}
                     onChangeText={onChange}
                     placeholder="GG/MM/AAAA"
                   />

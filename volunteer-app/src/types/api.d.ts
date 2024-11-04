@@ -130,7 +130,7 @@ export interface components {
       /** Format: date-time */
       created_at: string;
       /** Format: date-time */
-      end_date: string;
+      end_date: string | null;
       end_time: string;
       experience: components["schemas"]["Experience"];
       external_id: string;
@@ -138,7 +138,7 @@ export interface components {
       id: number;
       message: string;
       /** Format: date-time */
-      start_date: string;
+      start_date: string | null;
       start_time: string;
       status: string;
       /** Format: date-time */
