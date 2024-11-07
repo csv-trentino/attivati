@@ -30,7 +30,6 @@ const UploadButton: FC<Props> = ({ onUpload }) => {
         message: "Upload success",
         type: "success",
       });
-      console.log(response.data.Url);
       onUpload(response.data.Url);
     } catch (error) {
       console.error(error);

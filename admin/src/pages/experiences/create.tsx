@@ -49,7 +49,6 @@ export const ExperienceCreate = () => {
               );
             }}
             options={data?.data.map((item) => {
-              console.log(item);
               return ({
               label: item.name,
               value: item.id,
