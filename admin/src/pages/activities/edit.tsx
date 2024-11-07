@@ -111,7 +111,7 @@ export const ActivityEdit = () => {
             },
           ]}
         >
-          <Input />
+          <Input placeholder="YYYY-MM-DD" />
         </Form.Item>
 
         <Form.Item
@@ -123,7 +123,7 @@ export const ActivityEdit = () => {
             },
           ]}
         >
-          <Input />
+          <Input placeholder="YYYY-MM-DD" />
         </Form.Item>
 
         <Form.Item
@@ -135,7 +135,7 @@ export const ActivityEdit = () => {
             },
           ]}
         >
-          <Input />
+          <Input placeholder="HH:SS" />
         </Form.Item>
 
         <Form.Item
@@ -147,7 +147,7 @@ export const ActivityEdit = () => {
             },
           ]}
         >
-          <Input />
+          <Input placeholder="HH:SS" />
         </Form.Item>
       </Form>
     </Edit>

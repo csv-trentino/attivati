@@ -125,7 +125,7 @@ export const ExperienceCreate = () => {
             },
           ]}
         >
-          <Input />
+          <Input placeholder="YYYY-MM-DD" />
         </Form.Item>
 
         <Form.Item
@@ -137,7 +137,7 @@ export const ExperienceCreate = () => {
             },
           ]}
         >
-          <Input />
+          <Input placeholder="YYYY-MM-DD" />
         </Form.Item>
 
         <Form.Item
@@ -149,7 +149,7 @@ export const ExperienceCreate = () => {
             },
           ]}
         >
-          <Input />
+          <Input placeholder="HH:SS" />
         </Form.Item>
 
         <Form.Item
@@ -161,7 +161,7 @@ export const ExperienceCreate = () => {
             },
           ]}
         >
-          <Input />
+          <Input placeholder="HH:SS" />
         </Form.Item>
 
         <Form.Item label={"Published"} name={["published"]}>
