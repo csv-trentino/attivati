@@ -13,11 +13,11 @@ export const CategoryShow = () => {
   return (
     <Show isLoading={isLoading}>
       <Title level={5}>{"ID"}</Title>
-      <NumberField value={record?.id ?? ""} />
+      <NumberField value={record?.id || "---"} />
       <Title level={5}>{"Name"}</Title>
-      <TextField value={record?.name ?? ""} />
+      <TextField value={record?.name || "---"} />
       {/* <Title level={5}>{"Code"}</Title>
-      <TextField value={record?.code ?? ""} /> */}
+      <TextField value={record?.code || "---"} /> */}
     </Show>
   );
 };
