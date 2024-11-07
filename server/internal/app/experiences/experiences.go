@@ -140,14 +140,14 @@ type ExperienceCreateData struct {
 	StartTime string `json:"start_time"`
 	EndTime   string `json:"end_time"`
 
-	IsRecurring *bool `json:"is_recurring"`
-	Monday      *bool `json:"monday"`
-	Tuesday     *bool `json:"tuesday"`
-	Wednesday   *bool `json:"wednesday"`
-	Thursday    *bool `json:"thursday"`
-	Friday      *bool `json:"friday"`
-	Saturday    *bool `json:"saturday"`
-	Sunday      *bool `json:"sunday"`
+	IsRecurring *bool `json:"is_recurring,omitempty"`
+	Monday      *bool `json:"monday,omitempty"`
+	Tuesday     *bool `json:"tuesday,omitempty"`
+	Wednesday   *bool `json:"wednesday,omitempty"`
+	Thursday    *bool `json:"thursday,omitempty"`
+	Friday      *bool `json:"friday,omitempty"`
+	Saturday    *bool `json:"saturday,omitempty"`
+	Sunday      *bool `json:"sunday,omitempty"`
 
 	Published bool `json:"published,omitempty"`
 
