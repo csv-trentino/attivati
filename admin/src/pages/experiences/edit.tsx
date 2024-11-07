@@ -145,7 +145,7 @@ export const ExperienceEdit = () => {
             },
           ]}
         >
-          <Input placeholder="HH:SS" />
+          <Input placeholder="HH:MM" />
         </Form.Item>
 
         <Form.Item
@@ -157,7 +157,7 @@ export const ExperienceEdit = () => {
             },
           ]}
         >
-          <Input placeholder="HH:SS" />
+          <Input placeholder="HH:MM" />
         </Form.Item>
 
         <Form.Item label={"Published"} name={["published"]}>

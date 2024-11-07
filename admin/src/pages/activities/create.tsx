@@ -114,7 +114,7 @@ export const ActivityCreate = () => {
             },
           ]}
         >
-          <Input placeholder="HH:SS" />
+          <Input placeholder="HH:MM" />
         </Form.Item>
 
         <Form.Item
@@ -126,7 +126,7 @@ export const ActivityCreate = () => {
             },
           ]}
         >
-          <Input  placeholder="HH:SS" />
+          <Input  placeholder="HH:MM" />
         </Form.Item>
       </Form>
     </Create>
