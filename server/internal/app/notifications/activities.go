@@ -19,8 +19,9 @@ func activitiesEventsSubscribe() {
 		fmt.Printf("Notify activity accepted: %v\n", payload.Activity.Experience.Title)
 
 		err := NotificationTrigger(payload.User, NotificationActivityAccepted, map[string]interface{}{
-			"experience_title": payload.Activity.Experience.Title,
-			"first_name":       payload.User.FirstName,
+			"experience_title":  payload.Activity.Experience.Title,
+			"organization_name": payload.Activity.Experience.Organization.Name,
+			"first_name":        payload.User.FirstName,
 		})
 
 		if err != nil {
