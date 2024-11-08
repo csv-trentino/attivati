@@ -3,6 +3,7 @@ package media
 import (
 	"bytes"
 	"fmt"
+	"math/rand"
 
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/credentials"
@@ -10,6 +11,16 @@ import (
 	"github.com/aws/aws-sdk-go/service/s3"
 	"github.com/wevolunteer/wevolunteer/internal/app"
 )
+
+const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+
+func randomString(length int) string {
+	b := make([]byte, length)
+	for i := range b {
+		b[i] = charset[rand.Intn(len(charset))]
+	}
+	return string(b)
+}
 
 type MediaUploadData struct {
 	Filename    string
@@ -35,9 +46,11 @@ func MediaUpload(data MediaUploadData) (string, error) {
 
 	svc := s3.New(sess)
 
+	filename := randomString(16) + "-" + data.Filename
+
 	_, err = svc.PutObject(&s3.PutObjectInput{
 		Bucket:        aws.String(app.Config.AWS_BUCKET),
-		Key:           aws.String(data.Filename),
+		Key:           aws.String(filename),
 		Body:          bytes.NewReader(data.Body.Bytes()),
 		ContentLength: aws.Int64(data.Size),
 		ContentType:   aws.String(data.ContentType),
@@ -50,9 +63,9 @@ func MediaUpload(data MediaUploadData) (string, error) {
 	var url string
 
 	if app.Config.AWS_ENDPOINT != "" {
-		url = fmt.Sprintf("%s/%s", app.Config.CDN_ENDPOINT, data.Filename)
+		url = fmt.Sprintf("%s/%s", app.Config.CDN_ENDPOINT, filename)
 	} else {
-		url = fmt.Sprintf("https://%s.s3.%s.amazonaws.com/%s", app.Config.AWS_BUCKET, app.Config.AWS_REGION, data.Filename)
+		url = fmt.Sprintf("https://%s.s3.%s.amazonaws.com/%s", app.Config.AWS_BUCKET, app.Config.AWS_REGION, filename)
 	}
 
 	return url, nil
