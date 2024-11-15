@@ -1,6 +1,13 @@
 package accounts
 
 import (
+	"fmt"
+	"net/http"
+	"strconv"
+	"strings"
+	"time"
+
+	"github.com/danielgtaylor/huma/v2"
 	"github.com/google/uuid"
 	"github.com/wevolunteer/wevolunteer/internal/app"
 	"github.com/wevolunteer/wevolunteer/internal/models"
@@ -193,4 +200,78 @@ func UserDelete(id uint) error {
 
 func createUnusablePassword() string {
 	return uuid.New().String()
+}
+
+func UserExportStream() *huma.StreamResponse {
+
+	res := &huma.StreamResponse{
+		Body: func(ctx huma.Context) {
+			ctx.SetHeader("Content-Type", "text/csv")
+			ctx.SetHeader("Content-Disposition", `attachment; filename="users.csv"`)
+			writer := ctx.BodyWriter()
+
+			if d, ok := writer.(interface{ SetWriteDeadline(time.Time) error }); ok {
+				d.SetWriteDeadline(time.Now().Add(5 * time.Second))
+			} else {
+				fmt.Println("warning: unable to set write deadline")
+			}
+
+			csvHeader := []string{"id", "first_name", "last_name", "email", "phone", "created_at", "has_accepted_tos", "has_accepted_newsletter", "tax_code", "date_of_birth", "city", "languages"}
+			if _, err := writer.Write([]byte(strings.Join(csvHeader, ",") + "\n")); err != nil {
+				fmt.Println("unable to write header")
+				return
+			}
+
+			rows, err := app.DB.Model(&models.User{}).Rows()
+			if err != nil {
+				fmt.Println("unable to fetch users")
+				return
+			}
+			defer rows.Close()
+
+			for rows.Next() {
+				var user models.User
+				if err := app.DB.ScanRows(rows, &user); err != nil {
+					fmt.Println("unable to scan user")
+					return
+				}
+
+				record := []string{
+					strconv.Itoa(int(user.ID)),
+					user.FirstName,
+					user.LastName,
+					user.Email,
+					user.Phone,
+					user.CreatedAt.Format(time.RFC3339),
+					strconv.FormatBool(user.HasAcceptedTOS),
+					strconv.FormatBool(user.HasAcceptedNewsletter),
+					user.TaxCode,
+					user.DateOfBirth,
+					user.City,
+					user.Languages,
+				}
+				if _, err := writer.Write([]byte(strings.Join(record, ",") + "\n")); err != nil {
+					fmt.Println("unable to write user")
+					return
+				}
+
+				if f, ok := writer.(http.Flusher); ok {
+					f.Flush()
+				} else {
+					fmt.Println("unable to flush")
+					return
+				}
+
+			}
+
+			if err := rows.Err(); err != nil {
+				fmt.Println("unable to fetch users")
+				return
+			}
+
+			ctx.SetStatus(http.StatusOK)
+		},
+	}
+
+	return res
 }

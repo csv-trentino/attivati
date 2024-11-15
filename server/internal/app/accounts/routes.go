@@ -248,4 +248,23 @@ func RegisterRoutes(api huma.API) {
 		},
 		UserDeviceCreateController,
 	)
+
+	huma.Register(
+		api,
+		huma.Operation{
+			OperationID: "user-export",
+			Method:      http.MethodGet,
+			Summary:     "Export users in a CSV file",
+			Path:        "/user-export",
+			Tags:        RouteTagsUsers,
+			Middlewares: huma.Middlewares{
+				app.AuthMiddleware(api),
+				app.RoleMiddleware(api, app.UserRead),
+			},
+			Security: []map[string][]string{
+				{"bearer": {}},
+			},
+		},
+		UserExportController,
+	)
 }
