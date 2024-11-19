@@ -112,51 +112,19 @@ export const ExperienceEdit = () => {
           <Input />
         </Form.Item>
 
-        <Form.Item
-          label={"Start Date"}
-          name={["start_date"]}
-          rules={[
-            {
-              required: true,
-            },
-          ]}
-        >
+        <Form.Item label={"Start Date"} name={["start_date"]}>
           <Input placeholder="YYYY-MM-DD" />
         </Form.Item>
 
-        <Form.Item
-          label={"End Date"}
-          name={["end_date"]}
-          rules={[
-            {
-              required: true,
-            },
-          ]}
-        >
+        <Form.Item label={"End Date"} name={["end_date"]}>
           <Input placeholder="YYYY-MM-DD" />
         </Form.Item>
 
-        <Form.Item
-          label={"Start Time"}
-          name={["start_time"]}
-          rules={[
-            {
-              required: true,
-            },
-          ]}
-        >
+        <Form.Item label={"Start Time"} name={["start_time"]}>
           <Input placeholder="HH:MM" />
         </Form.Item>
 
-        <Form.Item
-          label={"End Time"}
-          name={["end_time"]}
-          rules={[
-            {
-              required: true,
-            },
-          ]}
-        >
+        <Form.Item label={"End Time"} name={["end_time"]}>
           <Input placeholder="HH:MM" />
         </Form.Item>
 
