@@ -219,15 +219,11 @@ type PaginationInfo struct {
 
 func Paginate(pagination PaginationInput) func(db *gorm.DB) *gorm.DB {
 	return func(db *gorm.DB) *gorm.DB {
-		if pagination.Page < 1 {
-			pagination.Page = 1
-		}
-
 		if pagination.PerPage == 0 {
 			pagination.PerPage = DefaultPageSize
 		}
 
-		return db.Offset((pagination.Page - 1) * pagination.PerPage).Limit(pagination.PerPage)
+		return db.Offset((pagination.Page) * pagination.PerPage).Limit(pagination.PerPage)
 	}
 }
 
