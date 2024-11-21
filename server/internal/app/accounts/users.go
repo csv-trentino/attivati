@@ -56,7 +56,7 @@ func UsersList(ctx *app.Context, filters *UserFilters) (*UserListData, error) {
 
 	if filters != nil {
 		if filters.Query != "" {
-			q = q.Where("name LIKE ?", "%"+filters.Query+"%")
+			q = q.Where("first_name LIKE ?", "%"+filters.Query+"%").Or("last_name LIKE ?", "%"+filters.Query+"%")
 		}
 	}
 

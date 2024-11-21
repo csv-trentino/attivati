@@ -9,14 +9,21 @@ import {
   useTable,
 } from "@refinedev/antd";
 import { BaseRecord, useGo } from "@refinedev/core";
-import { Space, Table } from "antd";
+import { Input, Space, Table } from "antd";
 import { getApiEndpoint, getAxiosInstance } from "../../config/network";
+import { useState } from "react";
 
 export const UserList = () => {
   const go = useGo();
 
+  const [search, setSearch] = useState("");
+
   const { tableProps } = useTable({
     syncWithLocation: true,
+    filters: {
+      defaultBehavior: "replace",
+      permanent: [{ field: "q", operator: "eq", value: search }],
+    },
   });
 
   const TrueIcon = () => <span>✅</span>;
@@ -57,6 +64,13 @@ export const UserList = () => {
         ),
       }}
     >
+            <Input
+        placeholder={"Search"}
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+        style={{ marginBottom: 16 }}
+      />
+
       <Table {...tableProps} rowKey="id">
         <Table.Column dataIndex="id" title={"ID"} />
         <Table.Column dataIndex="first_name" title={"Name"} />
