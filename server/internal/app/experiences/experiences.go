@@ -75,8 +75,8 @@ func ExperienceList(ctx *app.Context, filters *ExperienceFilters) (*ExperienceLi
 
 			q = q.
 				Joins("LEFT JOIN organizations on organizations.id = experiences.organization_id").
-				Where("experiences.title ILIKE ?", "%"+filters.Query+"%").
-				Or("organizations.name ILIKE ?", "%"+filters.Query+"%")
+				Where("experiences.title ILIKE ?", "%"+filters.Query+"%")
+			// .Or("organizations.name ILIKE ?", "%"+filters.Query+"%")
 		}
 
 		if len(filters.Categories) > 0 {
