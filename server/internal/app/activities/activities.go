@@ -69,7 +69,9 @@ func ActivityList(ctx *app.Context, filters *ActivityFilters) (*ActivityListData
 
 	if filters != nil {
 		if filters.Query != "" {
-			q = q.Where("name LIKE ?", "%"+filters.Query+"%")
+			q = q.
+				Joins("LEFT JOIN users ON users.id = activities.user_id").
+				Where("(users.first_name ILIKE ? OR users.last_name ILIKE ? OR users.email ILIKE ?)", "%"+filters.Query+"%", "%"+filters.Query+"%", "%"+filters.Query+"%")
 		}
 
 		if filters.Status != "" {
