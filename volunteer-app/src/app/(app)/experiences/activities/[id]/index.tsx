@@ -12,11 +12,13 @@ import { format, isAfter, isToday } from "date-fns";
 import { Image } from "expo-image";
 import { router, useLocalSearchParams } from "expo-router";
 import { useTranslation } from "react-i18next";
-import { Linking, Pressable } from "react-native";
+import { Linking, Pressable, useWindowDimensions } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
+import RenderHtml from "react-native-render-html";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function ActivityScreen() {
+  const { width } = useWindowDimensions();
   const { id } = useLocalSearchParams();
   const { t } = useTranslation();
   const { client } = useNetwork();
@@ -142,9 +144,7 @@ export default function ActivityScreen() {
 
           <Text variant="title">{t("opportunity", "Opportunity")}</Text>
 
-          <Text variant="body" color="secondaryText">
-            {data.experience.description}
-          </Text>
+          <RenderHtml contentWidth={width} source={{ html: data.experience.description }} />
 
           <Divider />
 

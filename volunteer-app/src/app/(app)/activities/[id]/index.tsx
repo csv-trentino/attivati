@@ -86,16 +86,22 @@ export default function ActivityScreen() {
         px="m"
       >
         <Box>
-          <Text variant="secondary">{t("weWillWaitYou", "We'll wait you")}:</Text>
+          {(data.activity.start_date || data.activity.end_date) && (
+            <Text variant="secondary">{t("weWillWaitYou", "We'll wait you")}:</Text>
+          )}
           <Box flexDirection="row" gap="xs">
-            <Text variant="body">{t("from", "From")}</Text>
-            <Text variant="body">
-              {data.activity.start_date ? format(new Date(data.activity.start_date), "d/MM") : ""}
-            </Text>
-            <Text variant="body">{t("to", "To").toLowerCase()}</Text>
-            <Text variant="body">
-              {data.activity.start_date ? format(new Date(data.activity.end_date), "d/MM") : ""}
-            </Text>
+            {data.activity.start_date && (
+              <>
+                <Text variant="body">{t("from", "From")}</Text>
+                <Text variant="body">{format(new Date(data.activity.start_date), "d/MM")}</Text>
+              </>
+            )}
+            {data.activity.end_date && (
+              <>
+                <Text variant="body">{t("to", "To").toLowerCase()}</Text>
+                <Text variant="body">{format(new Date(data.activity.end_date), "d/MM")}</Text>
+              </>
+            )}
           </Box>
         </Box>
         {["pending", "approved"].indexOf(data.activity.status) >= 0 && (

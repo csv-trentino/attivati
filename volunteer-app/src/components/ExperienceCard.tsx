@@ -77,9 +77,9 @@ export const ExperienceCard: FC<ExperienceCardProps> = ({ experience, onPress, o
             {experience.city}
           </Text>
           <Text variant="secondary">
-            {experience.start_date ? format(new Date(experience.start_date), "d/MM") : ""}
+            {experience.start_date ? format(new Date(experience.start_date), "d/MM/yyyy") : ""}
 
-            {experience.end_date ? ` - ${format(new Date(experience.end_date), "d/MM")}` : ""}
+            {experience.end_date ? ` - ${format(new Date(experience.end_date), "d/MM/yyyy")}` : ""}
           </Text>
         </Box>
         <Box flex={1}>

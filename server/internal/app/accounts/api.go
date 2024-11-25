@@ -292,3 +292,10 @@ func UserDeviceCreateController(c context.Context, input *UserDeviceCreateReques
 		Body: *device,
 	}, nil
 }
+
+func UserExportController(c context.Context, input *struct{}) (*huma.StreamResponse, error) {
+
+	res := UserExportStream()
+
+	return res, nil
+}

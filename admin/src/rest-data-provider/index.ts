@@ -29,7 +29,7 @@ export const dataProvider = (
       per_page?: number;
     } = {};
 
-    query.page = current - 1;
+    query.page = current
     query.per_page = pageSize;
 
     const combinedQuery = { ...query, ...queryFilters };

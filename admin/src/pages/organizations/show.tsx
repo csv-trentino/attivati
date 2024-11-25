@@ -1,4 +1,4 @@
-import { NumberField, Show, TextField } from "@refinedev/antd";
+import { ImageField, NumberField, Show, TextField } from "@refinedev/antd";
 import { useShow } from "@refinedev/core";
 import { Typography } from "antd";
 
@@ -12,8 +12,9 @@ export const OrganizationShow = () => {
 
   return (
     <Show isLoading={isLoading}>
+      <ImageField value={record?.logo} />
       <Title level={5}>{"ID"}</Title>
-      <NumberField value={record?.id ?? ""} />
+      <NumberField value={record?.id || "---"} />
       <Title level={5}>{"Name"}</Title>
       <TextField value={record?.name} />
       <Title level={5}>{"Phone"}</Title>
@@ -43,7 +44,7 @@ export const OrganizationShow = () => {
       <Title level={5}>{"Published"}</Title>
       <TextField value={record?.published ? "Yes" : "No"} />
       <Title level={5}>{"ExternalId"}</Title>
-      <TextField value={record?.external_id ?? ""} />
+      <TextField value={record?.external_id || "---"} />
     </Show>
   );
 };

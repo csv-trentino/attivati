@@ -1,8 +1,10 @@
 import { Create, ImageField, useForm, useSelect } from "@refinedev/antd";
-import { Flex, Form, Input, Switch, Typography } from "antd";
+import { AutoComplete, Flex, Form, Input, Switch, Typography } from "antd";
 import { Select } from "antd/lib";
 import UploadButton from "../../components/UploadButton";
 import ImageItem from "../../components/ImageItem";
+import { useState } from "react";
+import { useList } from "@refinedev/core";
 
 export const ExperienceCreate = () => {
   const {
@@ -10,6 +12,7 @@ export const ExperienceCreate = () => {
     saveButtonProps,
     form: { setFieldValue },
   } = useForm({});
+  const [searchValue, setSearchValue] = useState("");
 
   const { selectProps: categorySelectProps } = useSelect({
     resource: "categories",
@@ -17,10 +20,9 @@ export const ExperienceCreate = () => {
     optionValue: "id",
   });
 
-  const { selectProps: organizationsSelectProps } = useSelect({
+  const { data } = useList({
     resource: "organizations",
-    optionLabel: "name",
-    optionValue: "id",
+    filters: [{ field: "q", operator: "eq", value: searchValue }],
   });
 
   return (
@@ -35,7 +37,31 @@ export const ExperienceCreate = () => {
             },
           ]}
         >
-          <Select style={{ width: "100%" }} {...organizationsSelectProps} />
+          <AutoComplete
+            getRawInputElement={() => {
+              return (
+                <Input
+                  value={searchValue}
+                  onChange={(e) => {
+                    setSearchValue(e.target.value);
+                  }}
+                />
+              );
+            }}
+            options={data?.data.map((item) => {
+              return {
+                label: item.name,
+                value: item.id,
+              };
+            })}
+            onSearch={(value) => {
+              setSearchValue(value as unknown as string);
+            }}
+            onSelect={(value, option) => {
+              formProps.form?.setFieldValue("experience_id", value);
+              setSearchValue(option.label);
+            }}
+          />
         </Form.Item>
 
         <Form.Item
@@ -116,52 +142,20 @@ export const ExperienceCreate = () => {
           <Input />
         </Form.Item>
 
-        <Form.Item
-          label={"Start Date"}
-          name={["start_date"]}
-          rules={[
-            {
-              required: true,
-            },
-          ]}
-        >
-          <Input />
+        <Form.Item label={"Start Date"} name={["start_date"]}>
+          <Input placeholder="YYYY-MM-DD" />
         </Form.Item>
 
-        <Form.Item
-          label={"End Date"}
-          name={["end_date"]}
-          rules={[
-            {
-              required: true,
-            },
-          ]}
-        >
-          <Input />
+        <Form.Item label={"End Date"} name={["end_date"]}>
+          <Input placeholder="YYYY-MM-DD" />
         </Form.Item>
 
-        <Form.Item
-          label={"Start Time"}
-          name={["start_time"]}
-          rules={[
-            {
-              required: true,
-            },
-          ]}
-        >
-          <Input />
+        <Form.Item label={"Start Time"} name={["start_time"]}>
+          <Input placeholder="HH:MM" />
         </Form.Item>
 
-        <Form.Item
-          label={"End Time"}
-          name={["end_time"]}
-          rules={[
-            {
-              required: true,
-            },
-          ]}
-        >
-          <Input />
+        <Form.Item label={"End Time"} name={["end_time"]}>
+          <Input placeholder="HH:MM" />
         </Form.Item>
 
         <Form.Item label={"Published"} name={["published"]}>

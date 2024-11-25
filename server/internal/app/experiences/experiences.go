@@ -75,8 +75,7 @@ func ExperienceList(ctx *app.Context, filters *ExperienceFilters) (*ExperienceLi
 
 			q = q.
 				Joins("LEFT JOIN organizations on organizations.id = experiences.organization_id").
-				Where("experiences.title ILIKE ?", "%"+filters.Query+"%").
-				Or("organizations.name ILIKE ?", "%"+filters.Query+"%")
+				Where("(experiences.title ILIKE ? OR organizations.name ILIKE ?)", "%"+filters.Query+"%", "%"+filters.Query+"%")
 		}
 
 		if len(filters.Categories) > 0 {
@@ -88,10 +87,12 @@ func ExperienceList(ctx *app.Context, filters *ExperienceFilters) (*ExperienceLi
 		}
 
 		if filters.Published {
-			q = q.Where("published = ?", filters.Published)
+			q = q.Where("experiences.published = ?", filters.Published)
 		}
 
 	}
+
+	q.Order("start_date DESC")
 
 	pageInfo, err := app.PageInfo(q, filters.PaginationInput)
 
@@ -132,20 +133,20 @@ type ExperienceCreateData struct {
 	PostEnrollmentInstructions string  `json:"post_enrollment_instructions,omitempty"`
 	Skills                     string  `json:"skills,omitempty"`
 
-	StartDate string `json:"start_date"`
-	EndDate   string `json:"end_date"`
+	StartDate string `json:"start_date,omitempty"`
+	EndDate   string `json:"end_date,omitempty"`
 
-	StartTime string `json:"start_time"`
-	EndTime   string `json:"end_time"`
+	StartTime string `json:"start_time,omitempty"`
+	EndTime   string `json:"end_time,omitempty"`
 
-	IsRecurring *bool `json:"is_recurring"`
-	Monday      *bool `json:"monday"`
-	Tuesday     *bool `json:"tuesday"`
-	Wednesday   *bool `json:"wednesday"`
-	Thursday    *bool `json:"thursday"`
-	Friday      *bool `json:"friday"`
-	Saturday    *bool `json:"saturday"`
-	Sunday      *bool `json:"sunday"`
+	IsRecurring *bool `json:"is_recurring,omitempty"`
+	Monday      *bool `json:"monday,omitempty"`
+	Tuesday     *bool `json:"tuesday,omitempty"`
+	Wednesday   *bool `json:"wednesday,omitempty"`
+	Thursday    *bool `json:"thursday,omitempty"`
+	Friday      *bool `json:"friday,omitempty"`
+	Saturday    *bool `json:"saturday,omitempty"`
+	Sunday      *bool `json:"sunday,omitempty"`
 
 	Published bool `json:"published,omitempty"`
 
@@ -153,7 +154,9 @@ type ExperienceCreateData struct {
 }
 
 func ExperienceCreate(ctx *app.Context, data *ExperienceCreateData) (*models.Experience, error) {
-	fmt.Printf("data: %s\n", data.StartDate)
+	var err error
+	var startDate time.Time
+	var endDate time.Time
 
 	if data.OrganizationExternalID != "" {
 		org, err := organizations.OrganizationGetByExternalID(ctx, data.OrganizationExternalID)
@@ -164,14 +167,18 @@ func ExperienceCreate(ctx *app.Context, data *ExperienceCreateData) (*models.Exp
 		data.OrganizationID = org.ID
 	}
 
-	startDate, err := time.Parse("2006-01-02", data.StartDate)
-	if err != nil {
-		return nil, err
+	if data.StartDate != "" {
+		startDate, err = time.Parse("2006-01-02", data.StartDate)
+		if err != nil {
+			return nil, err
+		}
 	}
 
-	endDate, err := time.Parse("2006-01-02", data.EndDate)
-	if err != nil {
-		return nil, err
+	if data.EndDate != "" {
+		endDate, err = time.Parse("2006-01-02", data.EndDate)
+		if err != nil {
+			return nil, err
+		}
 	}
 
 	if data.ExternalID != "" {
@@ -307,20 +314,20 @@ type ExperienceUpdateData struct {
 	PostEnrollmentInstructions *string  `json:"post_enrollment_instructions,omitempty"`
 	Skills                     *string  `json:"skills,omitempty"`
 
-	StartDate *string `json:"start_date"`
-	EndDate   *string `json:"end_date"`
+	StartDate *string `json:"start_date,omitempty"`
+	EndDate   *string `json:"end_date,omitempty"`
 
-	StartTime *string `json:"start_time"`
-	EndTime   *string `json:"end_time"`
+	StartTime *string `json:"start_time,omitempty"`
+	EndTime   *string `json:"end_time,omitempty"`
 
-	IsRecurring *bool `json:"is_recurring"`
-	Monday      *bool `json:"monday"`
-	Tuesday     *bool `json:"tuesday"`
-	Wednesday   *bool `json:"wednesday"`
-	Thursday    *bool `json:"thursday"`
-	Friday      *bool `json:"friday"`
-	Saturday    *bool `json:"saturday"`
-	Sunday      *bool `json:"sunday"`
+	IsRecurring *bool `json:"is_recurring,omitempty"`
+	Monday      *bool `json:"monday,omitempty"`
+	Tuesday     *bool `json:"tuesday,omitempty"`
+	Wednesday   *bool `json:"wednesday,omitempty"`
+	Thursday    *bool `json:"thursday,omitempty"`
+	Friday      *bool `json:"friday,omitempty"`
+	Saturday    *bool `json:"saturday,omitempty"`
+	Sunday      *bool `json:"sunday,omitempty"`
 
 	Published *bool `json:"published,omitempty"`
 

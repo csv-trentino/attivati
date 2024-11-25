@@ -18,7 +18,7 @@ export default function ExperienceEnrollConfirmScreen() {
       </Box>
       <Box paddingTop="3xl" alignItems="center" marginHorizontal="m" flex={1}>
         <Image
-          source={require("@/assets/images/logo-square-md.png")}
+          source={require("@/assets/images/muscles.png")}
           style={{
             width: 80,
             height: 97,
@@ -29,7 +29,7 @@ export default function ExperienceEnrollConfirmScreen() {
 
         <Box width="70%" marginBottom="l">
           <Text variant="header" lineHeight={38} textAlign="center">
-            {t("thankYouForYourHelp", "Thank you for you help!")}
+            {t("applicationSent", "Application sent!")}
           </Text>
         </Box>
 
@@ -37,7 +37,7 @@ export default function ExperienceEnrollConfirmScreen() {
           <Trans i18nKey="experienceConfirmationMessage">
             You have successfully submitted your application. Now you just have to wait for the
             organization to contact you to schedule the next steps. Remember that you can always
-            check the status of your applications from the FaXTe Experiences tab.
+            check the status of your applications from the Attivati! Experiences tab.
           </Trans>
         </Text>
       </Box>

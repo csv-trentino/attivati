@@ -18,7 +18,7 @@ export default function ExperienceEnrollConfirmScreen() {
       </Box>
       <Box paddingTop="3xl" alignItems="center" marginHorizontal="m" flex={1}>
         <Image
-          source={require("@/assets/images/stars.png")}
+          source={require("@/assets/images/muscles.png")}
           style={{
             width: 80,
             height: 97,

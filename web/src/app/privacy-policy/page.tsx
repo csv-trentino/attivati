@@ -59,7 +59,7 @@ export default function PrivacyPolicy() {
       <ul>
 
         <li>Dati identificativi * (quali nome, cognome);</li>
-        <li>Dati di contatto * (indirizzo email)</li>
+        <li>Dati di contatto * (indirizzo email, numero di telefono)</li>
         <li>Dati pseudo-identificativi * (codice fiscale);</li>
         <li>Caratteristiche personali (data di nascita, lingue parlate);</li>
         <li>Dati demografici (città di residenza);</li>

@@ -177,7 +177,7 @@ export default function PrivacyPolicy() {
           </Text>
 
           <ListItem title="Dati identificativi *"> (quali nome, cognome);</ListItem>
-          <ListItem title="Dati di contatto *"> (indirizzo email)</ListItem>
+          <ListItem title="Dati di contatto *"> (indirizzo email, numero di telefono)</ListItem>
           <ListItem title="Dati pseudo-identificativi *"> (codice fiscale);</ListItem>
           <ListItem title="Caratteristiche personali">(data di nascita, lingue parlate);</ListItem>
           <ListItem title="Dati demografici"> (città di residenza);</ListItem>

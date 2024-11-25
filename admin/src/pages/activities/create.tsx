@@ -69,7 +69,15 @@ export const ActivityCreate = () => {
           />
         </Form.Item>
 
-        <Form.Item label={"Message"} name={["message"]}>
+        <Form.Item
+          label={"Message"}
+          name={["message"]}
+          rules={[
+            {
+              required: true,
+            },
+          ]}
+        >
           <Input.TextArea />
         </Form.Item>
 
@@ -82,7 +90,7 @@ export const ActivityCreate = () => {
             },
           ]}
         >
-          <Input />
+          <Input placeholder="YYYY-MM-DD" />
         </Form.Item>
 
         <Form.Item
@@ -94,7 +102,7 @@ export const ActivityCreate = () => {
             },
           ]}
         >
-          <Input />
+          <Input placeholder="YYYY-MM-DD"  />
         </Form.Item>
 
         <Form.Item
@@ -106,7 +114,7 @@ export const ActivityCreate = () => {
             },
           ]}
         >
-          <Input />
+          <Input placeholder="HH:MM" />
         </Form.Item>
 
         <Form.Item
@@ -118,7 +126,7 @@ export const ActivityCreate = () => {
             },
           ]}
         >
-          <Input />
+          <Input  placeholder="HH:MM" />
         </Form.Item>
       </Form>
     </Create>
