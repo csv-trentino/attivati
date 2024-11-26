@@ -31,7 +31,7 @@ jobs:
         with:
           context: ./server
           push: true
-          tags: metadonors/wevolunteers-api:staging
+          tags: metadonors/attivati-api:staging
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
