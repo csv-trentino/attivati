@@ -22,18 +22,13 @@ type GeoData struct {
 }
 
 var Categories = []models.Category{
-	{ID: 1, Name: "Cultura sport e ricreazione"},
-	{ID: 2, Name: "Istruzione e ricerca"},
-	{ID: 3, Name: "Sanità"},
-	{ID: 4, Name: "Assistenza sociale e protezione civile"},
-	{ID: 5, Name: "Ambiente"},
-	{ID: 6, Name: "Sviluppo economico e coesione sociale"},
-	{ID: 7, Name: "Tutela dei diritti e attività politica"},
-	{ID: 8, Name: "Filantropia e promozione del volontariato"},
-	{ID: 9, Name: "Cooperazione e solidarietà internazionale"},
-	{ID: 10, Name: "Religione"},
-	{ID: 11, Name: "Relazioni sindacali e rappresentanza di interessi"},
-	{ID: 12, Name: "Altre attività"},
+	{ID: 1, Name: "Arte, cultura, musica e sport"},
+	{ID: 2, Name: "Educazione e animazione giovanile"},
+	{ID: 3, Name: "Salute, disabilità, anziani e protezione civile"},
+	{ID: 5, Name: "Ambiente e animali"},
+	{ID: 7, Name: "Diritti, migrazioni, solitarietà internazionale"},
+	{ID: 13, Name: "Altro"},
+	{ID: 14, Name: "Alternanza Scuola-Lavoro"},
 }
 
 func InitDataCommand() error {
