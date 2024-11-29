@@ -3,7 +3,6 @@ package notifications
 import (
 	"context"
 	"fmt"
-	"log"
 
 	novu "github.com/novuhq/go-novu/lib"
 	"github.com/wevolunteer/wevolunteer/internal/app"
@@ -50,7 +49,7 @@ func NotificationTrigger(recipient *models.User, eventId string, payload map[str
 
 	_, err := novuClient.EventApi.Trigger(ctx, eventId, data)
 	if err != nil {
-		log.Fatal("novu error", err.Error())
+		fmt.Println("novu error", err.Error())
 		return err
 	}
 
@@ -79,7 +78,7 @@ func NotificationTopicTrigger(key string, eventId string, payload map[string]int
 
 	_, err := novuClient.EventApi.Trigger(ctx, eventId, data)
 	if err != nil {
-		log.Fatal("novu error", err.Error())
+		fmt.Println("novu error", err.Error())
 		return err
 	}
 
@@ -96,7 +95,7 @@ func NotificationCreateTopic(key string, name string) error {
 
 	err := novuClient.TopicsApi.Create(ctx, key, name)
 	if err != nil {
-		log.Fatal("novu error", err.Error())
+		fmt.Println("novu error", err.Error())
 		return err
 	}
 
@@ -129,7 +128,7 @@ func NotificationTopicAddSubscriber(topicKey string, subscriberUID string) error
 
 	err := novuClient.TopicsApi.AddSubscribers(ctx, topicKey, []string{subscriberUID})
 	if err != nil {
-		log.Fatal("novu error", err.Error())
+		fmt.Println("novu error", err.Error())
 		return err
 	}
 
@@ -146,7 +145,7 @@ func NotificationTopicRemoveSubscriber(topicKey string, subscriberUID string) er
 
 	err := novuClient.TopicsApi.RemoveSubscribers(ctx, topicKey, []string{subscriberUID})
 	if err != nil {
-		log.Fatal("novu error", err.Error())
+		fmt.Println("novu error", err.Error())
 		return err
 	}
 
@@ -170,7 +169,7 @@ func NotificationAddSubscriber(recipient *models.User) error {
 
 	_, err := novuClient.SubscriberApi.Identify(ctx, recipient.UID, data)
 	if err != nil {
-		log.Fatal("novu error", err.Error())
+		fmt.Println("novu error", err.Error())
 		return err
 	}
 

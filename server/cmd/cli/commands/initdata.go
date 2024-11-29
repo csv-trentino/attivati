@@ -4,7 +4,6 @@ import (
 	"encoding/csv"
 	"fmt"
 	"io"
-	"log"
 	"os"
 	"strconv"
 	"strings"
@@ -42,7 +41,7 @@ func InitDataCommand() error {
 	geoData, err := readGEODataFile("data/geoitaly.csv")
 
 	if err != nil {
-		log.Fatal(err)
+		return err
 	}
 
 	app.DB.Clauses(
@@ -68,7 +67,7 @@ func readGEODataFile(path string) ([]models.Place, error) {
 	fmt.Println("Reading Geo Data File")
 	file, err := os.Open(path)
 	if err != nil {
-		log.Fatal(err)
+		return nil, err
 	}
 	defer file.Close()
 
@@ -80,7 +79,7 @@ func readGEODataFile(path string) ([]models.Place, error) {
 	var seenCities = make(map[string]bool)
 
 	if _, err := reader.Read(); err != nil {
-		log.Fatal(err)
+		return nil, err
 	}
 
 	for {
@@ -89,7 +88,7 @@ func readGEODataFile(path string) ([]models.Place, error) {
 			break
 		}
 		if err != nil {
-			log.Fatal(err)
+			return nil, err
 		}
 
 		city := record[2]
@@ -97,13 +96,13 @@ func readGEODataFile(path string) ([]models.Place, error) {
 		lat_str := strings.Replace(record[5], ",", ".", 1)
 		lat, err := strconv.ParseFloat(lat_str, 64)
 		if err != nil {
-			log.Fatal(err)
+			return nil, err
 		}
 
 		long_str := strings.Replace(record[6], ",", ".", 1)
 		long, err := strconv.ParseFloat(long_str, 64)
 		if err != nil {
-			log.Fatal(err)
+			return nil, err
 		}
 
 		if _, ok := seenCities[city]; ok {
