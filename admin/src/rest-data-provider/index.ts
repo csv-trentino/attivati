@@ -52,6 +52,7 @@ export const dataProvider = (
     return {
       data: data.results,
       total: data.page_info.total || 0,
+      raw: data,
     };
   },
 

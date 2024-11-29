@@ -1,6 +1,7 @@
 package app
 
 import (
+	"fmt"
 	"time"
 
 	"github.com/spf13/viper"
@@ -83,7 +84,7 @@ func ParseConfig(path string) {
 	Config.APP_URL = viper.GetString("app_url")
 
 	if Config.JWT_SECRET == "" {
-		log.Fatal("JWT_SECRET must be set")
+		fmt.Println("JWT_SECRET must be set")
 	}
 
 	if Config.NOVU_API_KEY == "" {

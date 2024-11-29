@@ -2,7 +2,6 @@ package notifications
 
 import (
 	"fmt"
-	"log"
 
 	"github.com/wevolunteer/wevolunteer/internal/app/events"
 )
@@ -34,7 +33,7 @@ func usersEventsSubscribe() {
 			err = NotificationTopicAddSubscriber(user.Organization.UID, user.User.UID)
 
 			if err != nil {
-				log.Fatal("novu error", err.Error())
+				fmt.Println("novu error", err.Error())
 				return err
 			}
 
@@ -56,7 +55,7 @@ func usersEventsSubscribe() {
 			err := NotificationTopicRemoveSubscriber(user.Organization.UID, user.User.UID)
 
 			if err != nil {
-				log.Fatal("novu error", err.Error())
+				fmt.Println("novu error", err.Error())
 				return err
 			}
 			return nil

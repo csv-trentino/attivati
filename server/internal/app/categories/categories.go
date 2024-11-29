@@ -1,6 +1,8 @@
 package categories
 
 import (
+	"strings"
+
 	"github.com/wevolunteer/wevolunteer/internal/app"
 	"github.com/wevolunteer/wevolunteer/internal/models"
 	"gorm.io/gorm"
@@ -57,9 +59,12 @@ type CategoryCreateData struct {
 }
 
 func CategoryCreate(ctx *app.Context, data *CategoryCreateData) (*models.Category, error) {
+	code := strings.ToLower(data.Name)
+	code = strings.ReplaceAll(code, " ", "")
+
 	category := models.Category{
 		Name: data.Name,
-		Code: data.Code,
+		Code: code,
 	}
 
 	if err := app.DB.Create(&category).Error; err != nil {

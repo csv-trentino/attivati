@@ -26,7 +26,7 @@ func accountsEventsSubscribe() {
 			})
 
 			if err != nil {
-				log.Fatal("novu error", err.Error())
+				log.Println("novu error", err.Error())
 			}
 		}()
 
@@ -54,7 +54,7 @@ func accountsEventsSubscribe() {
 			})
 
 			if err != nil {
-				log.Fatal("novu error", err.Error())
+				log.Println("novu error", err.Error())
 			}
 		}()
 
@@ -75,7 +75,7 @@ func accountsEventsSubscribe() {
 		})
 
 		if err != nil {
-			log.Fatal("novu error", err.Error())
+			log.Println("novu error", err.Error())
 			return err
 		}
 
@@ -96,7 +96,7 @@ func accountsEventsSubscribe() {
 		})
 
 		if err != nil {
-			log.Fatal("novu error", err.Error())
+			log.Println("novu error", err.Error())
 			return err
 		}
 

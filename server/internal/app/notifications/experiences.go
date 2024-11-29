@@ -2,7 +2,6 @@ package notifications
 
 import (
 	"fmt"
-	"log"
 
 	"github.com/wevolunteer/wevolunteer/internal/app/events"
 )
@@ -24,7 +23,7 @@ func experiencesEventsSubscribe() {
 		})
 
 		if err != nil {
-			log.Fatal("novu error", err.Error())
+			fmt.Println("novu error", err.Error())
 			return err
 		}
 

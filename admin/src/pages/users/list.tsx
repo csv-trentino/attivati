@@ -9,7 +9,7 @@ import {
   useTable,
 } from "@refinedev/antd";
 import { BaseRecord, useGo } from "@refinedev/core";
-import { Input, Space, Table } from "antd";
+import { Input, Space, Table, Typography } from "antd";
 import { getApiEndpoint, getAxiosInstance } from "../../config/network";
 import { useState } from "react";
 
@@ -18,7 +18,7 @@ export const UserList = () => {
 
   const [search, setSearch] = useState("");
 
-  const { tableProps } = useTable({
+  const { tableProps, tableQuery } = useTable({
     syncWithLocation: true,
     filters: {
       defaultBehavior: "replace",
@@ -41,7 +41,7 @@ export const UserList = () => {
 
         const link = document.createElement("a");
         link.href = href;
-        link.setAttribute("download", "users.csv"); 
+        link.setAttribute("download", "users.csv");
         document.body.appendChild(link);
         link.click();
 
@@ -52,7 +52,7 @@ export const UserList = () => {
         console.error("Error exporting users", error);
       });
   };
-
+  // console.log(tableProps, tableQuery.data.raw);
   return (
     <List
       headerProps={{
@@ -64,7 +64,11 @@ export const UserList = () => {
         ),
       }}
     >
-            <Input
+      <Typography.Title level={5}>
+        {tableQuery?.data?.raw.total_users} users in total, {tableQuery?.data?.raw.newsletter_subscribers} subscribed to newsletter
+      </Typography.Title>
+
+      <Input
         placeholder={"Search"}
         value={search}
         onChange={(e) => setSearch(e.target.value)}
