@@ -40,8 +40,10 @@ func UserGet(id uint) (*models.User, error) {
 }
 
 type UserListData struct {
-	Results  []models.User       `json:"results"`
-	PageInfo *app.PaginationInfo `json:"page_info"`
+	Results               []models.User       `json:"results"`
+	PageInfo              *app.PaginationInfo `json:"page_info"`
+	TotalUsers            int64               `json:"total_users"`
+	NewsletterSubscribers int64               `json:"newsletter_subscribers"`
 }
 
 type UserFilters struct {
@@ -71,6 +73,14 @@ func UsersList(ctx *app.Context, filters *UserFilters) (*UserListData, error) {
 	q = q.Scopes(app.Paginate(filters.PaginationInput))
 
 	if err := q.Find(&data.Results).Error; err != nil {
+		return nil, err
+	}
+
+	if err := app.DB.Model(&models.User{}).Count(&data.TotalUsers).Error; err != nil {
+		return nil, err
+	}
+
+	if err := app.DB.Model(&models.User{}).Where("has_accepted_newsletter = ?", true).Count(&data.NewsletterSubscribers).Error; err != nil {
 		return nil, err
 	}
 
