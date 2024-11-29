@@ -4,11 +4,11 @@ tasks:
   build:
     desc: Build the project
     cmds:
-      - go build -o bin/wevolunteer cmd/server/main.go
+      - go build -o bin/wevolunteer cmd/cli/main.go
   run:
     desc: Run the project
     cmds:
-      - go run cmd/server/main.go serve
+      - go run cmd/cli/main.go
 
   docker-build:
     desc: Build and Push the Docker image
