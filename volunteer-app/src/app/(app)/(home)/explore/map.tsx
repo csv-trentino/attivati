@@ -17,6 +17,8 @@ import MapView, { Marker, Region } from "react-native-maps";
 const pinBlack = require("@/assets/images/location-pin-black.png");
 const pinPink = require("@/assets/images/location-pin-pink.png");
 
+const TRENTO_LATLONG = [ 41.87194, 12.56738];
+
 export default function ExploreMapScreen() {
   const mapRef = useRef<MapView>(null);
   const { t } = useTranslation();
@@ -32,8 +34,8 @@ export default function ExploreMapScreen() {
 
       mapRef.current?.setCamera({
         center: {
-          latitude: filters.lat,
-          longitude: filters.lng,
+          latitude: filters.lat || TRENTO_LATLONG[0],
+          longitude: filters.lng || TRENTO_LATLONG[1],
         },
       });
     });
@@ -78,8 +80,8 @@ export default function ExploreMapScreen() {
       </Box>
       <MapView
         initialRegion={{
-          latitude: filters.lat || 41.87194,
-          longitude: filters.lng || 12.56738,
+          latitude: filters.lat || TRENTO_LATLONG[0],
+          longitude: filters.lng || TRENTO_LATLONG[1],
           latitudeDelta: 0.3,
           longitudeDelta: 0.3,
         }}
