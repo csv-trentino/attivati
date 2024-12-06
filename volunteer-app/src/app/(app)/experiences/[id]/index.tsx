@@ -5,6 +5,7 @@ import { useNetwork } from "@/contexts/network";
 import { useQuery } from "@tanstack/react-query";
 import { router, useLocalSearchParams } from "expo-router";
 import { useTranslation } from "react-i18next";
+import { When } from "react-if";
 import { ActivityIndicator } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -62,6 +63,8 @@ export default function ExperienceScreen() {
     );
   }
 
+  const isEnded = new Date(data.experience.end_date.split("T")[0]) < new Date(new Date().toISOString().split("T")[0]);
+
   return (
     <SafeAreaView>
       <ExperienceDetails
@@ -69,24 +72,26 @@ export default function ExperienceScreen() {
         isFavorite={data?.organization?.is_favorite}
       />
 
-      <Box
-        position="absolute"
-        bottom={32}
-        left={0}
-        right={0}
-        justifyContent="center"
-        alignItems="center"
-      >
-        <Button
-          variant="primary"
-          label={t("iWantToPartecipate", "I want to partecipate!")}
-          paddingHorizontal="xl"
-          borderRadius="full"
-          onPress={() => {
-            router.push(`/experiences/${id}/enroll`);
-          }}
-        />
-      </Box>
-    </SafeAreaView>
+      <When condition={!isEnded}>
+        <Box
+          position="absolute"
+          bottom={32}
+          left={0}
+          right={0}
+          justifyContent="center"
+          alignItems="center"
+        >
+          <Button
+            variant="primary"
+            label={t("iWantToPartecipate", "I want to partecipate!")}
+            paddingHorizontal="xl"
+            borderRadius="full"
+            onPress={() => {
+              router.push(`/experiences/${id}/enroll`);
+            }}
+          />
+        </Box>
+      </When>
+    </SafeAreaView> 
   );
 }
