@@ -10,7 +10,7 @@ The application design was created with Figma and can be viewed at the following
 
 Application is composed of:
 
-- Mobile Volunteer App: mobile application for volunteers [/volunteer-app]()
+- Mobile Volunteer App: mobile application for volunteers [/app]()
 - Backend: backend server for request management [/server]()
 - Admin Panel: administration panel [/admin]()
 - Web App: landing page [/web]()

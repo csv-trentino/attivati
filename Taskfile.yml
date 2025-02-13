@@ -5,4 +5,4 @@ tasks:
     desc: Start development server
     cmds:
       - docker compose up -d
-      - concurrently -c blue,red,green -n SRV,WEB,APP --kill-others "cd server && air" "cd web && yarn dev" "cd volunteer-app && yarn start"
+      - concurrently -c blue,red,green,yellow -n SRV,WEB,APP,ADMIN --kill-others "cd server && air" "cd web && yarn dev" "cd app && yarn start" "cd admin && yarn dev"
