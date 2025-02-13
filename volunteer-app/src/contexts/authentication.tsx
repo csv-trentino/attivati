@@ -175,6 +175,11 @@ export function SessionProvider(props: React.PropsWithChildren) {
           body: data,
         });
 
+        if (response.error) {
+          console.debug("verify code error:", response.error);
+          return false;
+        }
+
         if (response.data?.access_token) {
           const headers = {
             Authorization: `Bearer ${response.data.access_token}`,
