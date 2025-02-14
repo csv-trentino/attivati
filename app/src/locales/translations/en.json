@@ -1,6 +1,6 @@
 {
   "aboutMe": "About me",
-  "acceptedOrganizationPrivacy": "I consent to share my data with {experience.organization}",
+  "acceptedOrganizationPrivacy": "I consent to share my data with {{experience.organization}}",
   "acceptedRequirements": "I confirm that I meet the required criteria",
   "accounts": "Account",
   "accountSettings": "Account Settings",
@@ -161,7 +161,7 @@
   "tomorrow": "Tomorrow",
   "toTime": "To hour",
   "useYourLocation": "Use your location",
-  "verifyCodeDescription": "Insert the 5-digit code we sent to the address {email}",
+  "verifyCodeDescription": "Insert the 5-digit code we sent to the address {{email}}",
   "verifyEmail": "Verify Email",
   "volunteersActvities": "Volunteer activities",
   "waitYouAt": "We wait you:",

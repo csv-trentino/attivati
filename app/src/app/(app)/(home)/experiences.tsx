@@ -19,7 +19,7 @@ export default function ActivitiesScreen() {
   const { filters } = useFilters<ActivityFilters>();
 
   const { activities, fetchNextPage, refetch, isLoading } = useActivities({
-    // end_date_from: new Date().toISOString().split("T")[0],
+    end_date_from: new Date().toISOString().split("T")[0],
   });
 
   useEffect(() => {

@@ -83,7 +83,7 @@ func ActivityList(ctx *app.Context, filters *ActivityFilters) (*ActivityListData
 			if err != nil {
 				return nil, fmt.Errorf("invalid end date from")
 			}
-			q = q.Where("end_date >= ?", endDate)
+			q = q.Where("(end_date >= ? OR end_date IS NULL)", endDate)
 		}
 
 		if filters.EndDateTo != "" {
@@ -91,7 +91,7 @@ func ActivityList(ctx *app.Context, filters *ActivityFilters) (*ActivityListData
 			if err != nil {
 				return nil, fmt.Errorf("invalid end date to")
 			}
-			q = q.Where("end_date <= ?", endDate)
+			q = q.Where("(end_date <= ? OR end_date IS NULL)", endDate)
 		}
 
 		if filters.StartDateFrom != "" {
