@@ -4,6 +4,8 @@ export function validateEmail(email: string): boolean {
 }
 
 export function validateCF(cf: string): boolean {
+  cf = cf.trim();
+
   // Check length
   if (cf.length !== 16) {
     console.log(`Lunghezza non valida ${cf.length}`);
