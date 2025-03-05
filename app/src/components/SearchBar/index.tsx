@@ -66,7 +66,8 @@ const SearchBar: FC = () => {
             onChange={(value) => {
               setFilters({
                 ...filters,
-                date_start: value?.from || undefined,
+                published: true,
+                date_start: value?.from || new Date().toISOString().split("T")[0],
                 date_end: value?.to || undefined,
               });
             }}
