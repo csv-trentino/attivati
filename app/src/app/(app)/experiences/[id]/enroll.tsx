@@ -12,6 +12,7 @@ import { useNetwork } from "@/contexts/network";
 import { convertToDate } from "@/utils/formatters";
 import { validateCF } from "@/utils/validators";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { isAfter, isBefore, isSameDay } from "date-fns";
 import { router, useLocalSearchParams } from "expo-router";
 import { Controller, useForm } from "react-hook-form";
 import { Trans, useTranslation } from "react-i18next";
@@ -68,10 +69,20 @@ export default function ExperienceEnrollScreen() {
   }
 
   async function onSubmit(values: EnrollmentData) {
-    let errors = false;
+    let errors = [];
+
+    const volStartDate = new Date(values?.from_date?.split("/").reverse().join("-"));
+    const volEndDate = new Date(values?.to_date?.split("/").reverse().join("-"));
+    const volStartTime = values.from_time; // HH:MM
+    const volEndTime = values.to_time; // HH:MM
+    const expStartDate = new Date(data.start_date);
+    const expEndDate = new Date(data.end_date);
+    const today = new Date()
+    today.setHours(0, 0, 0, 0);
+
     try {
       if (!session?.user?.tax_code && (!values.tax_code || !validateCF(values.tax_code))) {
-        errors = true;
+        errors.push("tax_code");
         setError("tax_code", {
           type: "manual",
           message: t("Invalid tax code"),
@@ -79,7 +90,7 @@ export default function ExperienceEnrollScreen() {
       }
 
       if (!values.accepted_requirements) {
-        errors = true;
+        errors.push("accepted_requirements");
         setError("accepted_requirements", {
           type: "manual",
           message: t("youMustAcceptRequirements", "You must accept the required criteria"),
@@ -87,69 +98,135 @@ export default function ExperienceEnrollScreen() {
       }
 
       if (!values.accepted_privacy) {
-        errors = true;
+        errors.push("accepted_privacy");
         setError("accepted_privacy", {
           type: "manual",
           message: t("youMustAcceptPrivacy", "You must accept the privacy policy"),
         });
       }
 
-      if (errors) {
-        return;
+      // error if vol start date is not filled
+      if (!values.from_date) {
+        errors.push("from_date");
+        setError("from_date", {
+          type: "manual",
+          message: t("fillStartDate", "You must fill the start date"),
+        });
       }
 
-      let start_date = "";
-      let end_date = "";
-
-      if (values.from_date && values.to_date) {
-        start_date = values.from_date.split("/").reverse().join("-");
-        end_date = values.to_date.split("/").reverse().join("-");
-
-        if (new Date(start_date) > new Date(end_date)) {
-          setError("to_date", {
-            type: "manual",
-            message: t("endDateBeforeStartDate", "End date must be after start date"),
-          });
-
-          return;
-        }
+      // error if vol end date is not filled
+      if (!values.to_date) {
+        errors.push("to_date");
+        setError("to_date", {
+          type: "manual",
+          message: t("fillEndDate", "You must fill the end date"),
+        });
       }
 
-      if (values.from_time && values.to_time && values.from_date === values.to_date) {
-        if (values.from_time > values.to_time) {
+      // error if vol end date is before vol start date
+      if (volStartDate && volEndDate && isAfter(volStartDate, volEndDate)) {
+        errors.push("to_date");
+        setError("to_date", {
+          type: "manual",
+          message: t("endDateBeforeStartDate", "End date must be after start date"),
+        });
+      }
+      
+
+      // error if vol start date is before today (equal admitted)
+      if (volStartDate && isBefore(volStartDate, today)) {
+        errors.push("from_date");
+        setError("from_date", {
+          type: "manual",
+          message: t("startDateBeforeToday", "Start date must be after today"),
+        });
+      }
+
+      
+      // error if vol start date is before exp start date (equal admitted)
+      if (volStartDate && isBefore(volStartDate, expStartDate)) {
+        errors.push("from_date");
+        setError("from_date", {
+          type: "manual",
+          message: t("startDateBeforeExperience", "Start date must be after experience start date"),
+        });
+      }
+      
+      // error if vol start date is after exp end date (equal admitted)
+      if (volStartDate && isAfter(volStartDate, expEndDate)) {
+        errors.push("from_date");
+        setError("from_date", {
+          type: "manual",
+          message: t("startDateAfterExperience", "Start date must be before experience end date"),
+        });
+      }
+
+      
+      // error if vol end date is before today (equal admitted)
+      if (volEndDate &&  isBefore(volEndDate, today)) {
+        errors.push("to_date");
+        setError("to_date", {
+          type: "manual",
+          message: t("endDateBeforeToday", "End date must be after today"),
+        });
+      }
+
+      // error if vol end date is before exp start date (equal admitted)
+      if (volEndDate && isBefore(volEndDate, expStartDate)) {
+        errors.push("to_date");
+        setError("to_date", {
+          type: "manual",
+          message: t("endDateBeforeExperience", "End date must be after experience start date"),
+        });
+      }
+
+      // error if vol end date is after exp end date (equal admitted)
+      if (volEndDate && isAfter(volEndDate, expEndDate)) {
+        errors.push("to_date");
+        setError("to_date", {
+          type: "manual",
+          message: t("endDateAfterExperience", "End date must be before experience end date"),
+        });
+      }
+
+
+      // if is today (volStartTime == volEndTime) check if hour start is before hour end
+      if (volStartDate && volEndDate && volStartTime && volEndTime && isSameDay(volStartDate, volEndDate)) {
+        const startTime = new Date()
+        startTime.setHours(
+          parseInt(volStartTime.split(":")[0]),
+          parseInt(volStartTime.split(":")[1]),
+          0,
+          0,
+        );
+
+        const endTime = new Date()
+        endTime.setHours(
+          parseInt(volEndTime.split(":")[0]),
+          parseInt(volEndTime.split(":")[1]),
+          0,
+          0,
+        );
+
+        if (isAfter(startTime, endTime)) {
+          errors.push("to_time");
           setError("to_time", {
             type: "manual",
             message: t("endTimeBeforeStartTime", "End time must be after start time"),
           });
-
-          return;
         }
       }
-
-      if (values.from_time && values.from_date) {
-        // if from_date is today, check if from_time is in the future
-        const now = new Date();
-        const from_date = new Date(start_date);
-
-        if (now.toDateString() === from_date.toDateString()) {
-          const [hours, minutes] = values.from_time.split(":").map((v) => parseInt(v));
-
-          if (now.getHours() > hours || (now.getHours() === hours && now.getMinutes() > minutes)) {
-            setError("from_time", {
-              type: "manual",
-              message: t("startTimeInPast", "Start time must be in the future"),
-            });
-
-            return;
-          }
-        }
+      
+      if (errors.length > 0) {
+        console.log("errors", errors);
+        return;
       }
 
       const res = await client.POST("/activities", {
         body: {
-          start_date,
+          start_date: volStartDate.toISOString().split("T")[0],
           start_time: values.from_time || "",
-          end_date,
+          end_date: volEndDate.toISOString().split("T")[0],
           end_time: values.to_time || "",
           experience_id: experienceId,
           tax_code: values.tax_code || "",
