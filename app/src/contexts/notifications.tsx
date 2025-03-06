@@ -81,8 +81,6 @@ export const NotificationProvider: React.FC<NotificationProviderProps> = ({ chil
   const responseListener = useRef<Notifications.Subscription>();
   const { client } = useNetwork();
 
-  console.log("Expo Push Token: ", expoPushToken);
-
   useEffect(() => {
     async function registerDevice() {
       try {

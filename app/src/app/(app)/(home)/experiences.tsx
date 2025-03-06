@@ -9,7 +9,7 @@ import { useActivities } from "@/hooks/useActivities";
 import { Activity, ActivityFilters } from "@/types/data";
 import { FlashList } from "@shopify/flash-list";
 import { router } from "expo-router";
-import { useEffect, useMemo, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 
 export default function ActivitiesScreen() {
@@ -28,18 +28,6 @@ export default function ActivitiesScreen() {
     listRef.current?.scrollToOffset({ offset: 0, animated: true });
   }, [filters, refetch]);
 
-  const orderedActivities = useMemo(() => {
-    return activities.sort((a, b) => {
-      if (a.start_date < b.start_date) {
-        return -1;
-      }
-      if (a.start_date > b.start_date) {
-        return 1;
-      }
-      return 0;
-    });
-  }, [activities]);
-
   return (
     <SafeAreaView>
       <Box px="m" mt="2xl" mb="l">
@@ -52,7 +40,7 @@ export default function ActivitiesScreen() {
           refreshing={isLoading}
           ref={listRef}
           onRefresh={() => refetch()}
-          data={orderedActivities}
+          data={activities}
           keyExtractor={(item) => `a-${item.id}`}
           onEndReachedThreshold={0.8}
           onEndReached={() => fetchNextPage()}

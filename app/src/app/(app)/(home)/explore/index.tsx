@@ -25,7 +25,7 @@ function ExploreListScreen() {
   const { filters } = useFilters<ExperienceFilters>();
 
   const { experiences, fetchNextPage, refetch, isLoading } = useExperiences({
-    date_start: filters.date_start || new Date().toISOString().split("T")[0],
+    date_start: filters.date_start || undefined,
     date_end: filters.date_end || undefined,
     categories: filters.categories,
     q: filters.q,
