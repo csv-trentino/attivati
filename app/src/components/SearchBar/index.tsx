@@ -67,7 +67,7 @@ const SearchBar: FC = () => {
               setFilters({
                 ...filters,
                 published: true,
-                date_start: value?.from || new Date().toISOString().split("T")[0],
+                date_start: value?.from || undefined,
                 date_end: value?.to || undefined,
               });
             }}

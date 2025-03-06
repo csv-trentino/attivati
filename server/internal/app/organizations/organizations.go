@@ -83,6 +83,10 @@ func OrganizationsList(c *app.Context, filters *OrganizationFilters) (*Organizat
 		}
 	}
 
+	if c.Role == app.RoleVolunteer {
+		q = q.Where("published = ?", true)
+	}
+
 	pageInfo, err := app.PageInfo(q, filters.PaginationInput)
 
 	if err != nil {

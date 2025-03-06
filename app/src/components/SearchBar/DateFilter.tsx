@@ -148,7 +148,7 @@ function generateDefaultPeriods() {
     {
       label: DateIntervalEnum.AnyDate,
       value: {
-        from: new Date().toISOString().split("T")[0],
+        from: null,
         to: null,
       },
     },
@@ -156,7 +156,7 @@ function generateDefaultPeriods() {
       label: DateIntervalEnum.Today,
       value: {
         from: new Date().toISOString().split("T")[0],
-        to: new Date().toISOString().split("T")[0],
+        to: new Date().toISOString().split("T")[0], 
       },
     },
     {

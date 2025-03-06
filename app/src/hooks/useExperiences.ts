@@ -13,7 +13,6 @@ export function useExperiences(initialFilters: ExperienceFilters = {}) {
       const response = await client.GET("/experiences", {
         params: {
           query: {
-            date_start: new Date().toISOString().split("T")[0],
             ...initialFilters,
             ...filters,
             published: true,
