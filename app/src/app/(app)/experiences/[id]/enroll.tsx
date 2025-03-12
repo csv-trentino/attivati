@@ -61,6 +61,7 @@ export default function ExperienceEnrollScreen() {
     control,
     handleSubmit,
     setError,
+    getValues,
     formState: { errors },
   } = useForm<EnrollmentData>();
 
@@ -75,9 +76,9 @@ export default function ExperienceEnrollScreen() {
     const volEndDate = new Date(values?.to_date?.split("/").reverse().join("-"));
     const volStartTime = values.from_time; // HH:MM
     const volEndTime = values.to_time; // HH:MM
-    const expStartDate = new Date(data.start_date);
-    const expEndDate = new Date(data.end_date);
-    const today = new Date()
+    const expStartDate = new Date(data?.start_date || "");
+    const expEndDate = new Date(data?.end_date || "");
+    const today = new Date();
     today.setHours(0, 0, 0, 0);
 
     try {
@@ -131,7 +132,6 @@ export default function ExperienceEnrollScreen() {
           message: t("endDateBeforeStartDate", "End date must be after start date"),
         });
       }
-      
 
       // error if vol start date is before today (equal admitted)
       if (volStartDate && isBefore(volStartDate, today)) {
@@ -142,7 +142,6 @@ export default function ExperienceEnrollScreen() {
         });
       }
 
-      
       // error if vol start date is before exp start date (equal admitted)
       if (volStartDate && isBefore(volStartDate, expStartDate)) {
         errors.push("from_date");
@@ -151,7 +150,7 @@ export default function ExperienceEnrollScreen() {
           message: t("startDateBeforeExperience", "Start date must be after experience start date"),
         });
       }
-      
+
       // error if vol start date is after exp end date (equal admitted)
       if (volStartDate && isAfter(volStartDate, expEndDate)) {
         errors.push("from_date");
@@ -161,9 +160,8 @@ export default function ExperienceEnrollScreen() {
         });
       }
 
-      
       // error if vol end date is before today (equal admitted)
-      if (volEndDate &&  isBefore(volEndDate, today)) {
+      if (volEndDate && isBefore(volEndDate, today)) {
         errors.push("to_date");
         setError("to_date", {
           type: "manual",
@@ -189,10 +187,15 @@ export default function ExperienceEnrollScreen() {
         });
       }
 
-
       // if is today (volStartTime == volEndTime) check if hour start is before hour end
-      if (volStartDate && volEndDate && volStartTime && volEndTime && isSameDay(volStartDate, volEndDate)) {
-        const startTime = new Date()
+      if (
+        volStartDate &&
+        volEndDate &&
+        volStartTime &&
+        volEndTime &&
+        isSameDay(volStartDate, volEndDate)
+      ) {
+        const startTime = new Date();
         startTime.setHours(
           parseInt(volStartTime.split(":")[0]),
           parseInt(volStartTime.split(":")[1]),
@@ -200,7 +203,7 @@ export default function ExperienceEnrollScreen() {
           0,
         );
 
-        const endTime = new Date()
+        const endTime = new Date();
         endTime.setHours(
           parseInt(volEndTime.split(":")[0]),
           parseInt(volEndTime.split(":")[1]),
@@ -216,7 +219,7 @@ export default function ExperienceEnrollScreen() {
           });
         }
       }
-      
+
       if (errors.length > 0) {
         console.log("errors", errors);
         return;
@@ -294,7 +297,12 @@ export default function ExperienceEnrollScreen() {
                   <InputDate
                     label={t("fromDay", "Of the day")}
                     value={value}
-                    minimumDate={new Date()}
+                    minimumDate={(() => {
+                      if (!data || !data.start_date) return new Date();
+                      if (isAfter(convertToDate(data.start_date) || new Date(), new Date()))
+                        return convertToDate(data.start_date);
+                      return new Date();
+                    })()}
                     maximumDate={convertToDate(data.end_date)}
                     error={errors.from_date?.message}
                     onChangeText={onChange}
@@ -312,7 +320,12 @@ export default function ExperienceEnrollScreen() {
                     label={t("toDate", "Of the day")}
                     value={value}
                     error={errors.to_date?.message}
-                    minimumDate={new Date()}
+                    minimumDate={(() => {
+                      if (!data || !data.start_date) return new Date();
+                      if (isAfter(convertToDate(data.start_date) || new Date(), new Date()))
+                        return convertToDate(data.start_date);
+                      return new Date();
+                    })()}
                     maximumDate={convertToDate(data.end_date)}
                     onChangeText={onChange}
                     placeholder="GG/MM/AAAA"
