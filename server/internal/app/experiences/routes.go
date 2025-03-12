@@ -15,6 +15,7 @@ func RegisterRoutes(api huma.API) {
 		Path:        "/experiences",
 		Tags:        []string{"Experiences"},
 		Middlewares: huma.Middlewares{
+			app.AuthMiddleware(api),
 			app.RoleMiddleware(api, app.ExperienceRead),
 		},
 	}, ExperienceListController)
@@ -26,6 +27,7 @@ func RegisterRoutes(api huma.API) {
 		Path:        "/experiences/{id}",
 		Tags:        []string{"Experiences"},
 		Middlewares: huma.Middlewares{
+			app.AuthMiddleware(api),
 			app.RoleMiddleware(api, app.ExperienceRead),
 		},
 	}, ExperienceGetController)
